@@ -3,7 +3,8 @@
 	Sort stacks
  ---
 
-## 0. Logics 
-## 1. Complexity
+## 0. Datastructure
+## 1. Logics 
+## 2. Complexity
 
  ---
