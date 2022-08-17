@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:10:16 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/17 17:17:09 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:33:59 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,60 +84,3 @@ void	operation_reverse_rotate(t_list **stack)
 	popped = ft_lstpop_front(stack);
 	ft_lstadd_back(stack, popped);
 }
-
-/*
-#include <stdio.h>
-void	show_menu()
-{
-	printf(" 1. swap a\n");
-	printf(" 2. swap b\n");
-	printf(" 3. swap a and swap b\n");
-	printf(" 4. push a\n");
-	printf(" 5. push b\n");
-	printf(" 6. rotate a\n");
-	printf(" 7. rotate b\n");
-	printf(" 8. rotate a and rotate b\n");
-	printf(" 9. reverse rotate a\n");
-	printf("10. reverse rotate b\n");
-	printf("11. reverse rotate a and reverse rotate b\n");
-	printf("12. exit\n");
-	printf(">>");
-}
-
-void	print_stacks(t_list *stack_a, t_list *stack_b)
-{
-	printf("\n[STACK_A] ")
-	while (stack_a)
-	{
-		printf("%d ", stack_a->content);
-		stack_a = stack_a->next;
-	}
-	printf("\n[STACK_B] ");
-	while (stack_b)
-	{
-		printf("%d ", stack_b->content);
-		stack_b = stack_b->next;
-	}
-	printf("\n");
-}
-
-int main()
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-
-	int flag = 1;
-	while (flag)
-	{
-		show_menu();
-		int input;
-		scanf("%d", &input);
-		switch(input)
-		{
-			//fill cases
-		}
-		print_stacks(stack_a, stack_b);
-	}
-	return (0);
-}
-*/
