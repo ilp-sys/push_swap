@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:10:16 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/15 23:56:11 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/16 12:32:30 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,25 @@
 t_list	*ft_lstpop_front(t_list **lst)
 {
 	t_list	*popped;
+
+	b
 	return (popped);
 }
 
 t_list	*ft_lstpop_back(t_list **lst)
 {
+	t_list	*tmp;
 	t_list	*popped;
+
+	popped = NULL;
+	tmp = *lst;
+	while (tmp)
+	{
+		popped = tmp->next;
+		if (popped->next == NULL)
+			break ;
+		tmp = tmp->next;
+	}
 	return (popped);
 }
 
