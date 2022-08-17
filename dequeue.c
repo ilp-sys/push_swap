@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:10:16 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/16 12:32:30 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:17:09 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,40 @@
 
 t_list	*ft_lstpop_front(t_list **lst)
 {
-	t_list	*popped;
+	t_list	*head;
 
-	b
-	return (popped);
+	if (*lst == NULL)
+		return (NULL);
+
+	head = *lst;
+	*lst = (*lst)->next;
+	return (head);
 }
 
 t_list	*ft_lstpop_back(t_list **lst)
 {
-	t_list	*tmp;
-	t_list	*popped;
+	t_list	*cur;
+	t_list	*last;
 
-	popped = NULL;
-	tmp = *lst;
-	while (tmp)
+	if (*lst == NULL)
+		return (NULL);
+	cur = *lst;
+	last = cur->next;
+	if (last == NULL)
 	{
-		popped = tmp->next;
-		if (popped->next == NULL)
-			break ;
-		tmp = tmp->next;
+		last = cur;
+		cur = NULL;
 	}
-	return (popped);
+	else
+	{
+		while (last->next)
+		{
+			cur = cur->next;
+			last = cur->next;
+		}
+		cur->next = NULL;
+	}
+	return (last);
 }
 
 void	operation_swap(t_list **stack)
@@ -48,7 +61,7 @@ void	operation_swap(t_list **stack)
 	ft_lstadd_back(stack, popped2);
 }
 
-void	operation_push(t_list **src_list **dst)
+void	operation_push(t_list **src, t_list **dst)
 {
 	t_list	*popped;
 
@@ -69,9 +82,10 @@ void	operation_reverse_rotate(t_list **stack)
 	t_list	*popped;
 
 	popped = ft_lstpop_front(stack);
-	ft_lstadd_back(popped);
+	ft_lstadd_back(stack, popped);
 }
 
+/*
 #include <stdio.h>
 void	show_menu()
 {
@@ -126,3 +140,4 @@ int main()
 	}
 	return (0);
 }
+*/
