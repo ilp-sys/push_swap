@@ -65,12 +65,12 @@ int main()
 			case 3: operation_swap(&stack_a); operation_swap(&stack_b); break;
 			case 4: operation_push(&stack_b, &stack_a); break;
 			case 5: operation_push(&stack_a, &stack_b); break;
-			case 6: operation_rotate(&stack_a);
-			case 7: operation_rotate(&stack_b);
+			case 6: operation_rotate(&stack_a); break ;
+			case 7: operation_rotate(&stack_b); break;
 			case 8: operation_rotate(&stack_a); operation_rotate(&stack_b); break;
-			case 9: operation_reverse_rotate(&stack_a);
-			case 10: operation_reverse_rotate(&stack_b);
-			case 11: operation_reverse_rotate(&stack_a); operation_rotate(&stack_b); break;
+			case 9: operation_reverse_rotate(&stack_a); break;
+			case 10: operation_reverse_rotate(&stack_b); break;
+			case 11: operation_reverse_rotate(&stack_a); operation_reverse_rotate(&stack_b); break;
 			case 12: flag = 0; break;
         }
     }

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 17:10:16 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/17 17:33:59 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/17 20:28:52 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list	*ft_lstpop_back(t_list **lst)
 	if (last == NULL)
 	{
 		last = cur;
-		cur = NULL;
+		*lst = NULL;
 	}
 	else
 	{
@@ -82,5 +82,7 @@ void	operation_reverse_rotate(t_list **stack)
 	t_list	*popped;
 
 	popped = ft_lstpop_front(stack);
+	if (popped != NULL)
+		popped->next = NULL;
 	ft_lstadd_back(stack, popped);
 }
