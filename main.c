@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:42:28 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/18 15:02:13 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/18 15:05:02 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	t_list	*stack_b;
 
 	if (argc < 2)
-		return ;
+		return (0);
 	initialize_stack(argc, argv, &stack_a, &stack_b);
 	push_swap(&stack_a, &stack_b);
 	ft_lstclear(&stack_a, NULL);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 14:10:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/18 14:50:29 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/18 15:28:48 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	initialize_stack(int argc, char *argv[], t_list **stack_a, t_list **stack_b
 	{
 		splitted = ft_split(argv[i], ' ');
 		j = 0;
+		if (splitted[0] == NULL)
+			parse_error_exit();
 		while (splitted[j])
 		{
 			content = check_argument(splitted[j], *stack_a);
