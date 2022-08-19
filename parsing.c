@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 14:10:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/18 15:28:48 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/19 20:49:45 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int ft_atoi_protected(const char *str)
 
 	sign = 1;
 	result = 0;
-	while (ft_isspace(*str))
+	while (*str == ' ')
 		str++;
 	if (*str == '+' || *str == '-')
 	{

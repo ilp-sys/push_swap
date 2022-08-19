@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:45:30 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/18 15:05:53 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/19 16:29:45 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,25 @@
 
 # include "libft/libft.h"
 
+enum op{
+	sa = 0,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+}
+
 //push_swap_utils.c
 void	parse_error_exit();
 int		ft_isspace(int c);
 void	free_split(char **splitted);
+void	print_ops(t_list *lst);
 
 //parsing.c
 int		ft_atoi_protected(const char *str);
@@ -40,7 +55,7 @@ void	operation_rotate(t_list **stack);
 void	operation_reverse_rotate(t_list **stack);
 
 //push_swap.c
-void	push_swap(t_list **stack_a, t_list **stack_b);
+void	push_swap(t_list **stack_a, t_list **stack_b, t_list **ops);
 
 //main.c
 int		main(int argc, char *argv[]);
