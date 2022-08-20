@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:21:33 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/20 23:26:27 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 00:28:32 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	operation_swap(t_deq *queue)
 
 	popped1 = queue_pop_back(queue);
 	popped2 = queue_pop_back(queue);
-	if (popped2)
-		popped2->next = NULL;
+	if (popped1)
+		popped1->prev = NULL;
 	queue_push_back(queue, popped1);
 	queue_push_back(queue, popped2);
 }
@@ -31,7 +31,7 @@ void	operation_push(t_deq *src, t_deq *dst)
 
 	popped = queue_pop_back(src);
 	if (popped)
-		popped->next = NULL;
+		popped->prev = NULL;
 	queue_push_back(dst, popped);
 }
 
