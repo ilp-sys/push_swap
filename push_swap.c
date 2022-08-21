@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 16:11:53 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 22:13:11 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,3 @@ void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops)
 {
 
 }
-

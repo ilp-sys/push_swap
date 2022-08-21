@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 16:37:14 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 20:38:45 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_node	*get_new_node(int content);
 
 //push_swap_utils.c
 void	parse_err_exit();
-void	free_deq(t_deq *queue);
+void	print_ops(t_node *ops);
 
 //operations.c
 void	operation_swap(t_deq *queue);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 16:49:00 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 20:39:33 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,16 @@ int main(int argc, char *argv[])
 	queue_init(&ops);
 	if (argc > 2)
 	{
-		get_input(argc, argv, stack_a);
-		push_swap(stack_a, stack_b, ops);
-		//print_ops();
+		get_input(argc, argv, stack_a); 	//parse
+		push_swap(stack_a, stack_b, ops); 	//sort
+		while (ops->head->next) 			//print
+			ops->head = ops->head->next;	//push front when you append
+		while (ops->head)
+		{
+			print_ops(ops->head);
+			ops->head = ops->head->prev;
+		}
 	}
-	//debug
-	print_queue(stack_a);
+	print_queue(stack_a); //check
 	return (0);
 }

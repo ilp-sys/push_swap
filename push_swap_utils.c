@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 16:25:13 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 20:38:41 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,29 @@ void	parse_err_exit()
 	exit(EXIT_FAILURE);
 }
 
-void	free_deq(t_deq *queue)
+void	print_ops(t_node *ops)
 {
-	t_node	*prev;
-	t_node	*curr;
-
-	prev = queue->head;
-	curr = prev;
-	while (curr)
-	{
-		curr = prev->next;
-		free(prev);
-	}
-	free(queue);
+	if (ops->content == 0)
+		write(STDOUT_FILENO, "sa\n", 3);
+	else if (ops->content == 1)
+		write(STDOUT_FILENO, "sb\n", 3);
+	else if (ops->content == 2)
+		write(STDOUT_FILENO, "ss\n", 3);
+	else if (ops->content == 3)
+		write(STDOUT_FILENO, "pa\n", 3);
+	else if (ops->content == 4)
+		write(STDOUT_FILENO, "pb\n", 3);
+	else if (ops->content == 5)
+		write(STDOUT_FILENO, "ra\n", 3);
+	else if (ops->content == 6)
+		write(STDOUT_FILENO, "rb\n", 3);
+	else if (ops->content == 7)
+		write(STDOUT_FILENO, "rr\n", 3);
+	else if (ops->content == 8)
+		write(STDOUT_FILENO, "rra\n", 4);
+	else if (ops->content == 9)
+		write(STDOUT_FILENO, "rrb\n", 4);
+	else if (ops->content == 10)
+		write(STDOUT_FILENO, "rrr\n", 4);
+	head = head->next;
 }

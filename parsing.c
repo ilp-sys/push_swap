@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:08:41 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 16:36:56 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:00:55 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	get_input(int argc, char *argv[], t_deq *stack_a)
 	int		i;
 	int		j;
 	int		num;
-	t_node	*new_node;
 	char	**splitted;
 
 	i = 1;
@@ -93,9 +92,8 @@ void	get_input(int argc, char *argv[], t_deq *stack_a)
 			parse_err_exit();
 		while (splitted[j])
 		{
-			num  = check_argument(stack_a, splitted[j]);
-			new_node = get_new_node(num);
-			queue_push_front(stack_a, new_node);
+			num = check_argument(stack_a, splitted[j]);
+			queue_push_front(stack_a, get_new_node(num));
 			j++;
 		}
 		free_split(splitted);
