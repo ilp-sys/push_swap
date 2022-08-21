@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/20 19:24:46 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:37:14 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 # include "libft/libft.h"
 
@@ -51,8 +52,10 @@ int		main(int argc, char *argv[]);
 
 //parsing.c
 int		ft_atoi_protected(const char *str);
-int		check_argument(int content, t_deq *queue);
-void	queue_init(int argc, char *argv[], t_deq *queue_a, t_deq *queue_b);
+int		check_argument(t_deq *stack_a, char *str);
+void	queue_init(t_deq **queue);
+void	get_input(int argc, char *argv[], t_deq *stack_a);
+void	free_split(char **splitted);
 
 //push_swap.c
 void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
@@ -66,6 +69,8 @@ void	queue_push_front(t_deq *queue, t_node *node);
 t_node	*get_new_node(int content);
 
 //push_swap_utils.c
+void	parse_err_exit();
+void	free_deq(t_deq *queue);
 
 //operations.c
 void	operation_swap(t_deq *queue);
