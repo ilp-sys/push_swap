@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:35:32 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/20 23:25:54 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/22 17:53:39 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,29 @@ t_node	*get_new_node(int content)
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
+}
+
+t_node	*get_last_node(t_deq *queue)
+{
+	t_node	*last;
+
+	last = queue->head;
+	while (last)
+		last = last->next;
+	return (last);
+}
+
+void	free_queue(t_deq **queue)
+{
+	t_node	*tmp;
+	t_node	*head;
+
+	head = queue->head;
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	free(queue);
 }
