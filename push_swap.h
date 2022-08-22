@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 20:38:45 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/22 11:29:29 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	free_split(char **splitted);
 
 //push_swap.c
 void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
-void	merge(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
+void	build_right_bottom(t_deq *queue_a, *t_deq *queue_b, t_deq *ops, int *pos);
+void	build_right_top(t_deq *queue_a, *t_deq *queue_b, t_deq *ops, int *pos);
+void	build_left_bottom(t_deq *queue_a, *t_deq *queue_b, t_deq *ops, int *pos);
+void	merge(t_deq *queue_a, t_deq *queue_b, t_deq *ops, int *pos);
 
 //queue_utils.c
 t_node	*queue_pop_back(t_deq *queue);
@@ -71,6 +74,7 @@ t_node	*get_new_node(int content);
 //push_swap_utils.c
 void	parse_err_exit();
 void	print_ops(t_node *ops);
+size_t	get_queue_size(t_deq *queue);
 
 //operations.c
 void	operation_swap(t_deq *queue);

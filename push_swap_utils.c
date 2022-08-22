@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 20:38:41 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/22 10:45:45 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ void	print_ops(t_node *ops)
 	else if (ops->content == 10)
 		write(STDOUT_FILENO, "rrr\n", 4);
 	head = head->next;
+}
+
+size_t	get_queue_size(t_deq *queue)
+{
+	size_t	size;
+	t_node	*head;
+
+	size = 0;
+	head = queue->head;
+	while (head)
+	{
+		size++;
+		head = head->next;
+	}
+	return (size);
 }
