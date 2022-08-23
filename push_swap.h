@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/22 17:53:00 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/23 17:22:11 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,15 @@ void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
 void	build_right_bottom(t_deq *queue_a, *t_deq *queue_b);
 void	build_right_top(t_deq *queue_a, *t_deq *queue_b);
 void	build_left_bottom(t_deq *queue_a, *t_deq *queue_b);
-void	merge_all(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
-void	merge_sub(t_infos info[3], );
+void	merge(t_info info[3], t_deq *queue_a, t_deq *queue_b, int iter_count);
+
+//push_swap_utils.c
+void	parse_err_exit();
+void	print_ops(t_node *ops);
+size_t	sorted_ascend(t_deq *queue, int top);
+size_t	sorted_descend(t_deq *queue, int top);
+size_t	sum_sorted(t_info info[3]);
+int		find_min(t_info info[3]);
 
 //queue_utils.c
 t_node	*queue_pop_back(t_deq *queue);
@@ -79,14 +86,7 @@ void	queue_push_front(t_deq *queue, t_node *node);
 t_node	*get_new_node(int content);
 size_t	get_queue_size(t_deq *queue);
 t_node	*get_last_node(t_deq *queue);
-void	free_queue(t_deq **queue);
-
-//push_swap_utils.c
-void	parse_err_exit();
-void	print_ops(t_node *ops);
-size_t	sorted_ascend(t_deq *queue, int top);
-size_t	sorted_descend(t_deq *queue, int top);
-size_t	sum_sorted(int sorted[3]);
+//void	free_queue(t_deq **queue); - not needed, I guess?
 
 //operations.c
 void	operation_swap(t_deq *queue);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/22 17:56:15 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/23 17:26:04 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,93 @@ size_t sorted_descend(t_deq *queue, int top)
 	return (sorted);
 }
 
+t_info	set_info(t_deq *queue_a, t_deq *queue_b, int iter_count)
+{
+	t_info	info[3];
+
+	if (iter_count % 2)
+	{
+		info[0].from = queue_a->head;
+		info[1].from = get_last_node(queue_a);
+		info[2].from = queue_b->head;
+		info[0].till = sorted_ascend(info[0].from, 0);
+		info[1].till = sorted_ascend(info[1].from, 1);
+		info[2].till = sorted_ascend(info[2].from, 0);
+	}
+	else
+	{
+		info[0].from = queue_a->head;
+		info[1].from = get_last_node(queue_a);
+		info[2].from = queue_b->head;
+		info[0].till = sorted_descend(info[0].from, 0);
+		info[1].till = sorted_descend(info[1].from, 1);
+		info[2].till = sorted_descend(info[2].from, 0);
+	}
+	return (info);
+}
+
+int find_min(t_info info[3])
+{
+	long long	num0;
+	long long	num1;
+	long long	num2;
+
+	if (info[0].from)
+		num0 = info[0]->content;
+	else
+		num0 = INT_MAX + 1;
+	if (info[1].from)
+		num1 = info[1]->content;
+	else
+		num1 = INT_MAX + 1;
+	if (info[2].from)
+		num2 = info[2]->content;
+	else
+		num2 = INT_MAX + 1;
+	if (num0 <= num1 && num0 <= num2)
+		return (0);
+	if (num1 <= num0 && num1 <= num2)
+		return (1);
+	else
+		return (2);
+}
+}
+
+void	merge(t_info info[3], t_deq *queue_a, t_deq *queue_b, int iter_count)
+{
+	int	min;
+
+	while (info[0].till == 0 && info[1].till == 0 && info[2].till == 0)
+	{
+		min = find_min(info);
+		if (min == 0)
+			info[0].till--;
+		else if (min == 1)
+			info[1].till--;
+		else
+			info[2].till--;
+	}
+}
+
 void	build_right_bottom(t_deq *queue_a, t_deq *queue_b)
 {
 	int		iter_count;
-	size_t	sorted[3];
-	t_deq	*queue_c;
 	size_t	size;
-	t_info	infos[3];
+	size_t	sum;
+	t_info	info[3];
 
+	sum = 0;
 	iter_count = 1;
-	queue_init(queue_c);
 	size = get_queue_size(queue_a) / 3; 
-	while (size -= sum_sorted(sorted) > 0)
+	while (1)
 	{
-		if (iter_count % 2)
-			//do something
-			;
-		else
-			;
-
+		info  = set_info(queue_a, qubue_b, iter_count);
+		merge(info, queue_a, queue_b, iter_count);
 		iter_count++;
+		sum += sum_sorted(info);
+		if (size < sum)
+			break ;
 	}
-	//move to queue_c from queue_b
-	free_queue(&quque_c);
 }
 
 void	build_right_top(t_deq *queue_a, t_deq *queue_b)
@@ -100,22 +164,10 @@ void	build_left_bottom(t_deq *queue_a, t_deq *queue_b)
 {
 }
 
-void	merge_all(t_deq *queue_a, t_deq *queue_b, t_deq *ops)
-{
-	t_node	*end1;
-	t_node	*end2;
-	t_node	*end3;
-
-	end1 = queue_a->head;
-	end2 = queue_b->head;
-	end3 = get_last_node(queue_b);
-
-}
-
 void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops)
 {
 	build_right_bottom(queue_a, queue_b);
 	build_right_top(queueu_a, queue_b);
 	build_left_bottom(queue_a, queue_b);
-	merge_all(queue_a, queue_b, ops);
+	merge();
 }
