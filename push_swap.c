@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 20:11:53 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/24 23:32:39 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	divide(t_data data, t_deq (*meta)[2], int pos)
 	}
 }
 
+//TODO - fix error in quotient
 void	design_division(int size, int cub_num, t_deq (*meta)[2], int pos)
 {
 	int	quotient;
@@ -73,7 +74,29 @@ void	design_division(int size, int cub_num, t_deq (*meta)[2], int pos)
 	}
 }
 
-void merge(t_data data, t_deq (*meta)[2], int pos)
+void	move_to_otherside(t_data data, int size, int pos)
+{
+	while (size--)
+	{
+		if (pos)
+		{
+			operation_push(data.queue_a, data.queue_b);
+			append_to_ops(pb);
+		}
+		else
+		{
+			operation_push(data.queue_b, data.queue_a);
+			append_to_ops(pa);
+		}
+	}
+}
+
+void	get_smallest(int num1, int num2, int num3)
+{
+}
+
+
+void	merge(t_data data, t_deq (*meta)[2], int pos)
 {
 	int	size;
 
@@ -81,15 +104,15 @@ void merge(t_data data, t_deq (*meta)[2], int pos)
 		size = get_queue_size(data.queue_a);
 	else
 		size = get_queue_size(data.queue_b);
-	size /= 3;
 	//move one third of current stack and this could be a tmp memory
-	while (size--)
-	{
-		if (pos)
-			opearaion_push();
-	}
+	size /= 3;
+	move_to_otherside(data, size, pos);
 	//and merge to the back of the other stack
 	//refer to the meta data, be aware of the memeory management while updating
+	while (size--)
+	{
+
+	}
 }
 
 //data structure of index 0 is always a queue_a and so on

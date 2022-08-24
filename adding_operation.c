@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:38:28 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 22:22:20 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:36:23 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ void	optimize_rotate(t_deq *ops, int op)
 
 void	append_to_ops(t_deq *ops, int op)
 {
-	if (ops->head == NULL)
+	if (ops->head)
 	{
-		queue_push_front(ops, get_new_node(op));
-		return ;
+		if (op == sa || op == sb || op == ss)
+			optimize_swap(ops, op);
+		else if (op == pa || op == pb)
+			optimize_push(ops, op);
+		else if (op == ra || op == rb || op == rr ||\
+				 op == rra || op == rrb || op == rrr)
+			optimize_rotate(ops, op);
 	}
-	if (op == sa || op == sb || op == ss)
-		optimize_swap(ops, op);
-	else if (op == pa || op == pb)
-		optimize_push(ops, op);
-	else if (op == ra || op == rb || op == rr ||\
-			 op == rra || op == rrb || op == rrr)
-		optimize_rotate(ops, op);
+	else
+		queue_push_front(ops, get_new_node(op));
 }
