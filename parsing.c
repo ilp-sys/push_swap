@@ -6,18 +6,11 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:08:41 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/21 17:00:55 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/24 21:09:42 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	queue_init(t_deq **queue)
-{
-	*queue = (t_deq *)malloc(sizeof(t_deq));
-	(*queue)->size = 0;
-	(*queue)->head = NULL;
-}
 
 void	free_split(char **splitted)
 {
@@ -35,27 +28,34 @@ void	free_split(char **splitted)
 int	ft_atoi_protected(const char *str)
 {
 	int			sign;
+	int			flag;
 	long long	result;
 
 	sign = 1;
 	result = 0;
+	flag = 0;
 	while (*str == ' ')
 		str++;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
+		{
+			flag++;
 			sign *= -1; 
+		}
 		str++;
 	}
 	while (*str >= '0' && *str <= '9')
 	{
+		if (flag && flag < 2)
+			flag++;
 		result *= 10;
 		result += (*str - '0') * sign;
 		if (!(result >= INT_MIN && result <= INT_MAX))
 			parse_err_exit();
 		str++;
 	}
-	if (*str != '\0')
+	if (*str != '\0' || !(flag % 2))
 		parse_err_exit();
 	return ((int)result);
 }

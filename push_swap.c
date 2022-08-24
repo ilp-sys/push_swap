@@ -6,168 +6,112 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/23 17:26:04 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/24 20:11:53 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	sorted_ascend(t_deq *queue, int top)
+int	get_cubic_num(int size, int *pos)
 {
-	t_node	*head;
-	t_node	*next;
-	size_t	sorted;
+	int	cub_num;
 
-	sorted = 1;
-	head = queue->head;
-	if (top)
-		while (head->next)
-			head = head->next;
-	while (1)
+	cub_num = 1;
+	*pos = 1;
+	while (cub_num < (size / 3))
 	{
-		if (top)
-			next = head->prev;
-		else 
-			next = head->next;
-		if (next == NULL)
-			break ;
-		if (head->content < next->content)
-			sorted++;
+		cub_num *= 3;
+		*pos = !(*pos);
+	}
+	return (cub_num);
+}
+
+void	init_data(t_deq *queue_a, t_deq *queue_b, t_deq *ops, t_data *data)
+{
+	data->queue_a = queue_a;
+	data->queue_b = queue_b;
+	data->ops = ops;
+}
+
+void	sort3(t_data data)
+{
+
+}
+
+void	sort4(t_data data)
+{
+
+}
+
+void	divide(t_data data, t_deq (*meta)[2], int pos)
+{
+	//divide a whole stack into sorted small triangles
+	//in accordance with the meta stack
+	while (meta[pos])
+	{
+		if (meta[pos]->content == DEFAULT_SIZE)
+			sort3(data);
+		else if (meta[pos]->content == DEFAULT_SIZE + 1)
+			sort4(data);
+		meta[pos] = meta[pos]->next;
+	}
+}
+
+void	design_division(int size, int cub_num, t_deq (*meta)[2], int pos)
+{
+	int	quotient;
+	int	remainder;
+
+	quotient = size / cub_num;
+	remainder = size % cub_num;
+	while (quotient--)
+	{
+		if (remainder--)
+			queue_push_back(meta[pos], get_new_node(DEFAULT_SIZE + 1));
 		else
-			break ;
+			queue_push_back(meta[pos], get_new_node(DEFAULT_SIZE));
 	}
-	return (sorted);
 }
 
-size_t sorted_descend(t_deq *queue, int top)
+void merge(t_data data, t_deq (*meta)[2], int pos)
 {
-	t_node	*head;
-	t_node	*next;
-	size_t	sorted;
+	int	size;
 
-	sorted = 1;
-	head = queue->head;
-	if (top)
-		while (head->next)
-			head = head->next;
-	while (1)
-	{
-		if (top)
-			next = head->prev;
-		else 
-			next = head->next;
-		if (next == NULL)
-			break ;
-		if (head->content > next->content)
-			sorted++;
-		else
-			break ;
-	}
-	return (sorted);
-}
-
-t_info	set_info(t_deq *queue_a, t_deq *queue_b, int iter_count)
-{
-	t_info	info[3];
-
-	if (iter_count % 2)
-	{
-		info[0].from = queue_a->head;
-		info[1].from = get_last_node(queue_a);
-		info[2].from = queue_b->head;
-		info[0].till = sorted_ascend(info[0].from, 0);
-		info[1].till = sorted_ascend(info[1].from, 1);
-		info[2].till = sorted_ascend(info[2].from, 0);
-	}
+	if (!pos)
+		size = get_queue_size(data.queue_a);
 	else
+		size = get_queue_size(data.queue_b);
+	size /= 3;
+	//move one third of current stack and this could be a tmp memory
+	while (size--)
 	{
-		info[0].from = queue_a->head;
-		info[1].from = get_last_node(queue_a);
-		info[2].from = queue_b->head;
-		info[0].till = sorted_descend(info[0].from, 0);
-		info[1].till = sorted_descend(info[1].from, 1);
-		info[2].till = sorted_descend(info[2].from, 0);
+		if (pos)
+			opearaion_push();
 	}
-	return (info);
+	//and merge to the back of the other stack
+	//refer to the meta data, be aware of the memeory management while updating
 }
 
-int find_min(t_info info[3])
-{
-	long long	num0;
-	long long	num1;
-	long long	num2;
-
-	if (info[0].from)
-		num0 = info[0]->content;
-	else
-		num0 = INT_MAX + 1;
-	if (info[1].from)
-		num1 = info[1]->content;
-	else
-		num1 = INT_MAX + 1;
-	if (info[2].from)
-		num2 = info[2]->content;
-	else
-		num2 = INT_MAX + 1;
-	if (num0 <= num1 && num0 <= num2)
-		return (0);
-	if (num1 <= num0 && num1 <= num2)
-		return (1);
-	else
-		return (2);
-}
-}
-
-void	merge(t_info info[3], t_deq *queue_a, t_deq *queue_b, int iter_count)
-{
-	int	min;
-
-	while (info[0].till == 0 && info[1].till == 0 && info[2].till == 0)
-	{
-		min = find_min(info);
-		if (min == 0)
-			info[0].till--;
-		else if (min == 1)
-			info[1].till--;
-		else
-			info[2].till--;
-	}
-}
-
-void	build_right_bottom(t_deq *queue_a, t_deq *queue_b)
-{
-	int		iter_count;
-	size_t	size;
-	size_t	sum;
-	t_info	info[3];
-
-	sum = 0;
-	iter_count = 1;
-	size = get_queue_size(queue_a) / 3; 
-	while (1)
-	{
-		info  = set_info(queue_a, qubue_b, iter_count);
-		merge(info, queue_a, queue_b, iter_count);
-		iter_count++;
-		sum += sum_sorted(info);
-		if (size < sum)
-			break ;
-	}
-}
-
-void	build_right_top(t_deq *queue_a, t_deq *queue_b)
-{
-
-}
-
-void	build_left_bottom(t_deq *queue_a, t_deq *queue_b)
-{
-}
-
+//data structure of index 0 is always a queue_a and so on
 void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops)
 {
-	build_right_bottom(queue_a, queue_b);
-	build_right_top(queueu_a, queue_b);
-	build_left_bottom(queue_a, queue_b);
-	merge();
+	int		size;
+	int		cub_num; //the number of initial segment 
+	int 	pos; //position where merger happens
+	t_data	data; //queue_a + queue_b + ops deq
+	t_deq	(*meta)[2]; //meta data to build triangle
+
+	size = get_queue_size(queue_a);
+	cub_num = get_cubic_num(size, &pos);
+	init_queue(meta[0]);
+	init_queue(meta[1]);
+	init_data(queue_a, queue_b, ops, &data);
+	design_division(size, cubnnum, &meta, pos) //design triangles for merger
+	divide(data, meta, pos); //divide into initial segments
+	while (cub_num /= 3)
+	{
+		merge(data, meta, pos); //updata meta here
+		pos = !pos;
+	}
 }
+

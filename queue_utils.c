@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:35:32 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/22 17:53:39 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/24 18:53:59 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,26 @@ void	free_queue(t_deq **queue)
 	}
 	free(queue);
 }
+
+size_t	get_queue_size(t_deq *queue)
+{
+	size_t	size;
+	t_node	*head;
+
+	size = 0;
+	head = queue->head;
+	while (head)
+	{
+		size++;
+		head = head->next;
+	}
+	return (size);
+}
+
+void	queue_init(t_deq **queue)
+{
+	*queue = (t_deq *)malloc(sizeof(t_deq));
+	(*queue)->size = 0;
+	(*queue)->head = NULL;
+}
+
