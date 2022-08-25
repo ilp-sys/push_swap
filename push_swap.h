@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/25 11:37:54 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/25 16:38:58 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	operate(t_deq *ops, int op, t_data data);
 void	append_to_ops(t_deq *ops, int op);
 void	optimize_swap(t_deq *ops, int op);
 void	optimize_push(t_deq *ops, int op);
-void	optimize_rotate(t_deq *ops, int op);
+void	optimize_rotate(t_deq *ops, int opvim
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:21:33 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 23:21:55 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/25 13:10:52 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,3 @@ void	operation_reverse_rotate(t_deq *queue) //shift down
 		popped->next = NULL;
 	queue_push_back(queue, popped);
 }
-
-//not needed I guess
-//void	operate(t_deq *ops, int op, t_data data)
-//{
-//	if (op == sa)
-//		operate_swap(data.queue_a);
-//	else if (op == sb)
-//		operate_swap(data.queue_b);
-//	else if (op == pa)
-//		operate_push(data.queue_b, data.queue_a);
-//	else if (op == pb)
-//		operate_push(data.queue_a, data.queue_b);
-//	else if (op == ra)
-//		operate_rotate(data.queue_a);
-//	else if (op == rb)
-//		operate_rotate(data.queue_b);
-//	else if (op == rr)
-//		operate_rotate(data.queue_a);
-//	else if (op == rra)
-//		operate_reverse_rotate(data.queue_a);
-//	else if (op == rrb)
-//		operate_reverse_rotate(data.queue_a);
-//	else if (op == rrr)
-//		operate_reverse_rotate(data.queue_a);
-//	append_to_ops(ops, op);
-//}
