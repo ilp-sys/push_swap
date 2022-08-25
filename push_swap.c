@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 23:32:39 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/25 11:49:05 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,12 @@ void	init_data(t_deq *queue_a, t_deq *queue_b, t_deq *ops, t_data *data)
 	data->ops = ops;
 }
 
-void	sort3(t_data data)
-{
-
-}
-
-void	sort4(t_data data)
-{
-
-}
-
+//TODO
 void	divide(t_data data, t_deq (*meta)[2], int pos)
 {
 	//divide a whole stack into sorted small triangles
 	//in accordance with the meta stack
-	while (meta[pos])
+	while (meta[pos]) //iterate while the meta pointer exist
 	{
 		if (meta[pos]->content == DEFAULT_SIZE)
 			sort3(data);
@@ -57,7 +48,6 @@ void	divide(t_data data, t_deq (*meta)[2], int pos)
 	}
 }
 
-//TODO - fix error in quotient
 void	design_division(int size, int cub_num, t_deq (*meta)[2], int pos)
 {
 	int	quotient;
@@ -65,12 +55,12 @@ void	design_division(int size, int cub_num, t_deq (*meta)[2], int pos)
 
 	quotient = size / cub_num;
 	remainder = size % cub_num;
-	while (quotient--)
+	while (cub_num--)
 	{
 		if (remainder--)
-			queue_push_back(meta[pos], get_new_node(DEFAULT_SIZE + 1));
+			queue_push_back(meta[pos], get_new_node(quotietnt + 1));
 		else
-			queue_push_back(meta[pos], get_new_node(DEFAULT_SIZE));
+			queue_push_back(meta[pos], get_new_node(quotient));
 	}
 }
 

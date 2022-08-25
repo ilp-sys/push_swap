@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 23:11:50 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/25 11:37:54 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <limits.h>
 
 # include "libft/libft.h"
-
-# define DEFAULT_SIZE 3
 
 enum ops
 {
@@ -72,8 +70,6 @@ void	init_data(t_deq *queue_a, t_deq *queue_b, t_deq *ops, t_data *data);
 void	design_division(int size, int cub_num, t_deq (*meta)[2]);
 void 	divide(t_data data, t_deq (*meta)[2], int pos);
 void	merge(t_data data, t_deq (*meta)[2], int pos);
-void	sort3(t_data data);
-void	sort4(t_data data);
 
 //push_swap_utils.c
 void	parse_err_exit();
