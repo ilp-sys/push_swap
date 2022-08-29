@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/22 13:08:17 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/29 15:05:25 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 			ops->head = ops->head->prev;
 		}
 	}
-	print_queue(stack_a); //check
-	print_queue(stack_b); 
+//	print_queue(stack_a); 
+//	print_queue(stack_b); 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/25 16:38:58 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/29 20:45:58 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 
 # include "libft/libft.h"
 
-enum ops
+# define ASCEND 0
+# define DESCEND 1
+
+enum e_ops
 {
 	sa = 0,
 	sb,
@@ -49,10 +52,15 @@ typedef struct s_deq
 
 typedef struct s_data
 {
-	t_deq	*queue_a;
-	t_deq	*queue_b;
+	t_deq	(*stack)[2];
 	t_deq	*ops;
 }t_data;
+
+typedef struct s_pair
+{
+	int	former;
+	int	latter;
+}t_pair;
 
 //main.c
 int		main(int argc, char *argv[]);
@@ -64,12 +72,6 @@ void	get_input(int argc, char *argv[], t_deq *stack_a);
 void	free_split(char **splitted);
 
 //push_swap.c
-void	push_swap(t_deq *queue_a, t_deq *queue_b, t_deq *ops);
-int		get_cubic_num(int size, int *pos);
-void	init_data(t_deq *queue_a, t_deq *queue_b, t_deq *ops, t_data *data);
-void	design_division(int size, int cub_num, t_deq (*meta)[2]);
-void 	divide(t_data data, t_deq (*meta)[2], int pos);
-void	merge(t_data data, t_deq (*meta)[2], int pos);
 
 //push_swap_utils.c
 void	parse_err_exit();
@@ -83,7 +85,6 @@ void	queue_push_front(t_deq *queue, t_node *node);
 t_node	*get_new_node(int content);
 size_t	get_queue_size(t_deq *queue);
 t_node	*get_last_node(t_deq *queue);
-void	free_queue(t_deq **queue);
 void	queue_init(t_deq **queue);
 
 //operations.c
@@ -91,13 +92,12 @@ void	operation_swap(t_deq *queue);
 void	operation_push(t_deq *src, t_deq *dst);
 void	operation_rotate(t_deq *queue);
 void	operation_reverse_rotate(t_deq *queue);
-void	operate(t_deq *ops, int op, t_data data);
 
 //adding_operation.c
 void	append_to_ops(t_deq *ops, int op);
 void	optimize_swap(t_deq *ops, int op);
 void	optimize_push(t_deq *ops, int op);
-void	optimize_rotate(t_deq *ops, int opvim
+void	optimize_rotate(t_deq *ops, int op);
 
 
 #endif
