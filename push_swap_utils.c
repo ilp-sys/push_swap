@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/29 20:45:36 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/29 21:19:35 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ t_pair	find_pivot(t_data data, size_t low, size_t high, int pos)
 	t_pair	pivot_v;
 	size_t	size;
 	t_node	*start_node;
+	int		tmp[high - low];
 
 	i = 0;
 	size = high - low;
+	ft_memset(tmp, 0, size);
 	while (i < size)
 	{
 
