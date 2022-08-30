@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/30 16:06:34 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 19:10:34 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_queue(t_deq *deq)
 
 void	sort_small_num(t_data data, size_t high, size_t low, int pos)
 {
-	//move to other top
+	//move required num of nodes to other top
 	//sort
 }
 
