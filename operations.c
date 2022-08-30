@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:21:33 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/25 13:10:52 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 21:55:31 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	operation_push(t_deq *src, t_deq *dst)
 	queue_push_back(dst, popped);
 }
 
-void	operation_rotate(t_deq *queue) //shift up
+void	operation_rotate(t_deq *queue) //shift up - (move from top to btm)
 {
 	t_node	*popped;
 
@@ -45,7 +45,7 @@ void	operation_rotate(t_deq *queue) //shift up
 	queue_push_front(queue, popped);
 }
 
-void	operation_reverse_rotate(t_deq *queue) //shift down
+void	operation_reverse_rotate(t_deq *queue) //shift down - (move from bmt to tmp)
 {
 	t_node	*popped;
 
