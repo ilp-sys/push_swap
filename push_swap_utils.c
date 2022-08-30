@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/29 21:19:35 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 15:22:45 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,39 @@ void	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops, t_data *data)
 	data.ops = ops;
 }
 
-t_pair	find_pivot(t_data data, size_t low, size_t high, int pos)
+t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)
 {
-	int		i;
+	t_pair	idx;
+	t_pair	min;
 	t_pair	pivot_v;
-	size_t	size;
-	t_node	*start_node;
-	int		tmp[high - low];
+	t_node	*cur_node;
+	int		tmp[high - low]; //TODO - possible risk
 
-	i = 0;
-	size = high - low;
-	ft_memset(tmp, 0, size);
-	while (i < size)
+	idx.former = 0;
+	idx.latter = 0;
+	min.former = INT_MIN; //abs min
+	min.latter = start_node->content; //cur min
+	cur_node = start_node;
+	ft_memset(tmp, 0, high - low);
+	while (idx.former < high - low)
 	{
-
-		i++;
+		cur_node = start_node;
+		while (idx.latter < high - low)
+		{
+			if (cur_node->content >= min.former && cur_node->content < min.latter)
+				min.latter = cur_node->content;
+			cur_node = get_next_node(cur_node, pos);
+			idx.latter++;
+		}
+		tmp[idx.former++] = min.latter;
+		min.former = min.latter;
 	}
-	pivot_v.former = 
+	pivot_v.former = tmp[(high - low) / 3 * 1];
+	pivot_v.latter = tmp[(high - low) / 3 * 2];
 	return (pivot_v);
 }
 
-t_node	*get_start_node(t_node *data, int pos)
+t_node	*get_start_node(t_data data, int pos)
 {
 	t_node	*start_node;
 
@@ -83,4 +95,12 @@ t_node	*get_start_node(t_node *data, int pos)
 	else
 		start_node = data.queue[1]->head;
 	return (start_node);
+}
+
+t_node	*get_next_node(t_node *node, int pos)
+{
+	if (pos % 3 == 2)
+		return (node->next);
+	else 
+		return (node->prev);
 }

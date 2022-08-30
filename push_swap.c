@@ -6,13 +6,51 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/29 20:41:41 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 16:05:11 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*partitioning(t_data data, size_t low, size_t high, int *pos)
+//TODO - clarify position var
+void	move_to_other_bottom(t_data data, int pos)
+{
+	operation_push(data.stack[pos], data.stack[!pos]);
+	if (pos)
+		append_to_ops(data.ops, pa);
+	else
+		append_to_ops(data.ops, pb);
+	operation_rotate(data.stack[!pos]);
+	if (pos)
+		append_to_ops(data.ops, ra);
+	else
+		append_to_ops(data.ops, rb);
+}
+
+void	move_to_other_top(t_data data, int pos)
+{
+	operation_reverse_rotate(data.stack[pos]);
+	if (pos)
+		append_to_ops(data.ops, rrb);
+	else
+		append_to_ops(data.ops, rra);
+	operation_push(data.stack[pos], data.stack[!pos]);
+	if (pos)
+		append_to_ops(data.ops, pa);
+	else
+		append_to_ops(data.ops, pb);
+}
+
+void	move_to_here_top(t_data data, int pos)
+{
+	operation_reverse_rotate(data.stack[pos]);
+	if (pos)
+		append_to_ops(data.ops, rrb);
+	else
+		append_to_ops(data.ops, rra);
+}
+
+t_pair	partitioning(t_data data, size_t low, size_t high, int *pos)
 {
 	t_pair	part_i[2];
 	t_pair	pivot_v[2];
@@ -20,8 +58,8 @@ int	*partitioning(t_data data, size_t low, size_t high, int *pos)
 
 	part_i.former = low;
 	part_i.latter = high;
-	pivot_v = find_pivot(data, low, high, pos);
 	start_node = get_start_node(data, pos);
+	pivot_v = find_pivot(start_node, low, high, pos);
 	while (high > low++)
 	{
 		if (start_node->content < pivot_v.former)
@@ -43,7 +81,7 @@ void	quick_sort(t_data data, size_t low, size_t high, int *pos)
 	if (high - low <= 3)
 	{
 		sort_small_num(data, high, low, pos);
-		(*pos)++;
+		(*pos)++; //TODO - tweak sequence
 		return ;
 	}
 	else
@@ -66,8 +104,5 @@ void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops)
 	pos = 0;
 	init_data(data);
 	size = get_queue_size(stack_a);
-	if (size < 4)
-		sort_small_num(stack_a, ops, &pos);
-	else
-		quick_sort(data, 0, size);
+	quick_sort(data, 0, size);
 }

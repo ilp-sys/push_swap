@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/29 20:45:58 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 15:20:41 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,17 @@ void	get_input(int argc, char *argv[], t_deq *stack_a);
 void	free_split(char **splitted);
 
 //push_swap.c
+void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
+void	quick_sort(t_data data, size_t low, size_t high, int *pos);
+t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
 
 //push_swap_utils.c
 void	parse_err_exit();
 void	print_ops(t_node *ops);
+void	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops, t_data *data);
+t_node	*get_start_node(t_data data, int pos);
+t_node	*get_next_node(t_node *node, int pos);
+t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos);
 
 //queue_utils.c
 t_node	*queue_pop_back(t_deq *queue);

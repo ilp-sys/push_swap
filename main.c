@@ -6,12 +6,13 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/29 15:05:25 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/30 16:06:34 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
+/*
 #include <stdio.h>
 void	print_queue(t_deq *deq)
 {
@@ -25,6 +26,13 @@ void	print_queue(t_deq *deq)
 		tmp = tmp->next;
 	}
 	printf("\n");
+}
+*/
+
+void	sort_small_num(t_data data, size_t high, size_t low, int pos)
+{
+	//move to other top
+	//sort
 }
 
 int main(int argc, char *argv[])
