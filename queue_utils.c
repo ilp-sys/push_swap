@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:35:32 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 18:53:59 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 21:10:20 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	free_queue(t_deq **queue)
 	t_node	*tmp;
 	t_node	*head;
 
-	head = queue->head;
+	head = (*queue)->head;
 	while (head)
 	{
 		tmp = head;

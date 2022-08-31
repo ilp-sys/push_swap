@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 20:17:17 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 21:16:15 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_deq
 
 typedef struct s_data
 {
-	t_deq	(*stack)[2];
+	t_deq	*stack[2];
 	t_deq	*ops;
 }t_data;
 
@@ -80,7 +80,6 @@ void	move_to_a_top(t_data data, int pos, size_t *cnt);
 void	move_to_b_top(t_data data, int pos, size_t *cnt);
 void	move_to_b_btm(t_data data, int pos, size_t *cnt);
 void	collect(t_data data, int pos, size_t cnt);
-t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
 void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 void	quick_sort(t_data data, size_t low, size_t high, int *pos);
 t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
@@ -88,7 +87,7 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
 //push_swap_utils.c
 void	parse_err_exit();
 void	print_ops(t_node *ops);
-void	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops, t_data *data);
+t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 t_node	*get_start_node(t_data data, int pos);
 t_node	*get_next_node(t_node *node, int pos);
 t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 14:35:27 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 21:16:42 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ void	print_ops(t_node *ops)
 		write(STDOUT_FILENO, "rrb\n", 4);
 	else if (ops->content == rrr)
 		write(STDOUT_FILENO, "rrr\n", 4);
-	head = head->next;
 }
 
-void	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops, t_data *data)
+t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops)
 {
+	t_data	data;
+
 	data.stack[0] = stack_a;
-	data.stack[1] = stack_a;
+	data.stack[1] = stack_b;
 	data.ops = ops;
+	return (data);
 }
 
 t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 20:16:11 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 21:21:48 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ void	sort_2(t_data data, int pos)
 	const t_node	*next_node = get_next_node(data, pos);
 
 	if (pos % 3 == 1)
+	{
 		if (curr_node->content > next_node->content)
 		{
 			operation_swap(data.stack[0]);
 			append_to_ops(data.ops, sa);
 		}
+	}
 	else
 	{
 		if (pos % 3 == 0)
@@ -72,8 +74,33 @@ void	sort_2(t_data data, int pos)
 	}
 }
 
-int	check_type(t_data data)
+int	check_type(t_node *start_node)
 {
+	const int num1 = start_node->content;
+	const int num2 = start_node->prev->content;
+	const int num3 = start_node->prev->prev->content;
+
+	if (num1 < num2 && num1 < num2)
+	{
+		if (num2 < num3)
+			return (0);
+		else
+			return (1);
+	}
+	else if (num2 < num3 && num2 < num1)
+	{
+		if (num1 < num3)
+			return (1);
+		else
+			return (2);
+	}
+	else if (num3 < num1 && num3 < num1)
+	{
+		if (num1 > num2)
+			return (1);
+		else 
+			return (3);
+	}
 }
 
 void	sort_3(t_data data, int pos)
@@ -85,8 +112,8 @@ void	sort_3(t_data data, int pos)
 	if (pos % 3 == 0)
 		while (i++ < 3)
 		{
-			operation_reverese_rotate(data.stack[1]);
-			append_to_ops(data.ops, rrb)
+			operation_reverse_rotate(data.stack[1]);
+			append_to_ops(data.ops, rrb);
 		}
 	i = 0;
 	if (pos % 3 == 0 || pos % 3 == 2)
@@ -97,7 +124,7 @@ void	sort_3(t_data data, int pos)
 		}
 	while (1)
 	{
-		type = check_type(data, pos);
+		type = check_type(data.stack[0]->head);
 		if (type == 0)
 			break ;
 		else if (type == 1)
@@ -105,15 +132,15 @@ void	sort_3(t_data data, int pos)
 			operation_swap(data.stack[0]);
 			append_to_ops(data.ops, sa);
 		}
-		else if (type = 2)
+		else if (type == 2)
 		{
 			operation_rotate(data.stack[0]);
-			append_to_ops(data.ops, ra)
+			append_to_ops(data.ops, ra);
 		}
 		else if (type == 3)
 		{
 			operation_reverse_rotate(data.stack[0]);
-			append_to_ops(data.ops, rra)
+			append_to_ops(data.ops, rra);
 		}
 	}
 }
