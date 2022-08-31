@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/30 19:10:34 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 20:16:11 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,105 @@ void	print_queue(t_deq *deq)
 }
 */
 
+void	sort_1(t_data data, int pos)
+{
+	if (pos % 3 != 1)
+		move_to_a_top(data, pos);
+}
+
+void	sort_2(t_data data, int pos)
+{
+	const t_node	*curr_node = get_start_node(data, pos);
+	const t_node	*next_node = get_next_node(data, pos);
+
+	if (pos % 3 == 1)
+		if (curr_node->content > next_node->content)
+		{
+			operation_swap(data.stack[0]);
+			append_to_ops(data.ops, sa);
+		}
+	else
+	{
+		if (pos % 3 == 0)
+		{
+			operation_reverse_rotate(data.stack[1]);
+			append_to_ops(data.ops, rrb);
+			operation_reverse_rotate(data.stack[1]);
+			append_to_ops(data.ops, rrb);
+		}
+		if (curr_node->content < next_node->content && (pos % 3) == 2)
+		{
+			operation_swap(data.stack[1]);
+			append_to_ops(data.ops, sb);
+		}
+		else if (curr_node->content > next_node->content && (pos % 3) == 0)
+		{
+			operation_swap(data.stack[1]);
+			append_to_ops(data.ops, sb);
+		}
+		operation_push(data.stack[1], data.stack[0]);
+		append_to_ops(data.ops, pa);
+		operation_push(data.stack[1], data.stack[0]);
+		append_to_ops(data.ops, pa);
+	}
+}
+
+int	check_type(t_data data)
+{
+}
+
+void	sort_3(t_data data, int pos)
+{
+	int	i;
+	int	type;
+
+	i = 0;
+	if (pos % 3 == 0)
+		while (i++ < 3)
+		{
+			operation_reverese_rotate(data.stack[1]);
+			append_to_ops(data.ops, rrb)
+		}
+	i = 0;
+	if (pos % 3 == 0 || pos % 3 == 2)
+		while (i++ < 3)
+		{
+			operation_push(data.stack[1], data.stack[0]);
+			append_to_ops(data.ops, pa);
+		}
+	while (1)
+	{
+		type = check_type(data, pos);
+		if (type == 0)
+			break ;
+		else if (type == 1)
+		{
+			operation_swap(data.stack[0]);
+			append_to_ops(data.ops, sa);
+		}
+		else if (type = 2)
+		{
+			operation_rotate(data.stack[0]);
+			append_to_ops(data.ops, ra)
+		}
+		else if (type == 3)
+		{
+			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, rra)
+		}
+	}
+}
+
 void	sort_small_num(t_data data, size_t high, size_t low, int pos)
 {
-	//move required num of nodes to other top
-	//sort
+	if (high - low == 0)
+		return ;
+	else if (high - low == 1)
+		sort_1(data, pos);
+	else if (high - low == 2)
+		sort_2(data, pos);
+	else
+		sort_3(data, pos);
 }
 
 int main(int argc, char *argv[])

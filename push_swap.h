@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/30 15:20:41 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 20:17:17 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ typedef struct s_pair
 
 //main.c
 int		main(int argc, char *argv[]);
+void	sort_small_num(t_data data, size_t high, size_t low, int pos);
+void	sort_1(t_data data, int pos);
+void	sort_2(t_data data, int pos);
+void	sort_3(t_data data, int pos);
 
 //parsing.c
 int		ft_atoi_protected(const char *str);
@@ -72,6 +76,11 @@ void	get_input(int argc, char *argv[], t_deq *stack_a);
 void	free_split(char **splitted);
 
 //push_swap.c
+void	move_to_a_top(t_data data, int pos, size_t *cnt);
+void	move_to_b_top(t_data data, int pos, size_t *cnt);
+void	move_to_b_btm(t_data data, int pos, size_t *cnt);
+void	collect(t_data data, int pos, size_t cnt);
+t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
 void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 void	quick_sort(t_data data, size_t low, size_t high, int *pos);
 t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/30 15:22:45 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 14:35:27 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ t_node	*get_start_node(t_data data, int pos)
 	t_node	*start_node;
 
 	if (pos % 3 == 0)
-		start_node = get_last_node(data.queue[0]);
+		start_node = get_last_node(data.stack[0]);
 	else if (pos % 3 == 1)
-		start_node = get_last_node(data.queue[1]);
+		start_node = get_last_node(data.stack[1]);
 	else
-		start_node = data.queue[1]->head;
+		start_node = data.stack[1]->head;
 	return (start_node);
 }
 

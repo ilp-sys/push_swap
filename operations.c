@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:21:33 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/30 21:55:31 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/08/31 14:38:04 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	operation_rotate(t_deq *queue) //shift up - (move from top to btm)
 	queue_push_front(queue, popped);
 }
 
-void	operation_reverse_rotate(t_deq *queue) //shift down - (move from bmt to tmp)
+void	operation_reverse_rotate(t_deq *queue) //shift down - (move from btm to top)
 {
 	t_node	*popped;
 
