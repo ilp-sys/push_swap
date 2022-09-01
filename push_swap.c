@@ -6,13 +6,13 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 21:20:22 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/01 09:39:44 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	move_to_a_top(t_data data, int pos, size_t *cnt)
+size_t	move_to_a_top(t_data data, int pos)
 {
 	if (pos % 3 == 1)
 	{
@@ -31,10 +31,14 @@ void	move_to_a_top(t_data data, int pos, size_t *cnt)
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
 	}
+	return (0);
 }
 
-void	move_to_b_top(t_data data, int pos, size_t *cnt)
+size_t	move_to_b_top(t_data data, int pos)
 {
+	size_t	cnt;
+
+	cnt = 0;
 	if (pos % 3 == 1)
 	{
 		operation_reverse_rotate(data.stack[0]);
@@ -48,17 +52,21 @@ void	move_to_b_top(t_data data, int pos, size_t *cnt)
 		append_to_ops(data.ops, pa);
 		operation_rotate(data.stack[0]);
 		append_to_ops(data.ops, ra);
-		(*cnt)++;
+		cnt++;
 	}
 	else 
 	{
 		operation_reverse_rotate(data.stack[1]);
 		append_to_ops(data.ops, rrb);
 	}
+	return (cnt);
 }
 
-void	move_to_b_btm(t_data data, int pos, size_t *cnt)
+size_t	move_to_b_btm(t_data data, int pos)
 {
+	size_t	cnt;
+
+	cnt = 0;
 	if (pos % 3 == 1)
 	{
 		operation_push(data.stack[0], data.stack[1]);
@@ -79,8 +87,9 @@ void	move_to_b_btm(t_data data, int pos, size_t *cnt)
 		append_to_ops(data.ops, pa);
 		operation_rotate(data.stack[0]);
 		append_to_ops(data.ops, ra);
-		(*cnt)++;
+		cnt++;
 	}
+	return (cnt);
 }
 
 void	collect(t_data data, int pos, size_t cnt)
@@ -120,14 +129,14 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int *pos)
 		if (start_node->content < pivot_v.former)
 		{
 			part_i.former++;
-			move_to_a_top(data, *pos, &cnt); //biggers
+			cnt += move_to_a_top(data, *pos); //biggers
 		}
 		else if (start_node->content >= pivot_v.former && start_node->content <= pivot_v.latter)
-			move_to_b_top(data, *pos, &cnt); //medians
+			cnt += move_to_b_top(data, *pos); //medians
 		else
 		{
 			part_i.latter++;
-			move_to_b_btm(data, *pos, &cnt); //smallers
+			cnt += move_to_b_btm(data, *pos); //smallers
 		}
 		start_node = get_next_node(start_node, *pos);
 	}
@@ -150,7 +159,7 @@ void	quick_sort(t_data data, size_t low, size_t high, int *pos)
 	else
 	{
 		tmp_pos = *pos;
-		pi = partitioning(data, high, low, pos);
+		pi = partitioning(data, low, high, pos);
 		quick_sort(data, low, pi.former, pos);
 		quick_sort(data, pi.former, pi.latter, pos);
 		quick_sort(data, pi.latter, high, pos);

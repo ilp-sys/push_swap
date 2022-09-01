@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:08:41 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/24 21:09:42 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/01 09:29:49 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	ft_atoi_protected(const char *str)
 			parse_err_exit();
 		str++;
 	}
-	if (*str != '\0' || !(flag % 2))
+//	if (*str != '\0' || !(flag % 2))
+	if (*str != '\0' && !(flag % 2))
 		parse_err_exit();
 	return ((int)result);
 }

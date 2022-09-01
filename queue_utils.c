@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:35:32 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 21:10:20 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/01 09:47:46 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_node	*get_last_node(t_deq *queue)
 	t_node	*last;
 
 	last = queue->head;
-	while (last)
+	while (last->next)
 		last = last->next;
 	return (last);
 }

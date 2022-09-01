@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/08/31 21:16:15 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/01 09:14:50 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	get_input(int argc, char *argv[], t_deq *stack_a);
 void	free_split(char **splitted);
 
 //push_swap.c
-void	move_to_a_top(t_data data, int pos, size_t *cnt);
-void	move_to_b_top(t_data data, int pos, size_t *cnt);
-void	move_to_b_btm(t_data data, int pos, size_t *cnt);
+size_t	move_to_a_top(t_data data, int pos);
+size_t	move_to_b_top(t_data data, int pos);
+size_t	move_to_b_btm(t_data data, int pos);
 void	collect(t_data data, int pos, size_t cnt);
 void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 void	quick_sort(t_data data, size_t low, size_t high, int *pos);
