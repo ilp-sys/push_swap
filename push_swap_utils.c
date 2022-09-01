@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/01 11:05:45 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/02 00:22:00 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,39 @@ t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops)
 
 t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)
 {
-	t_pair	idx;
-	t_pair	min;
+	int		min;
+	int		min_idx;
 	t_pair	pivot_v;
+	t_pair	idx;
 	t_node	*cur_node;
-	int		tmp[high - low]; //TODO - possible risk
+	int		dsc_ord[high - low];
+	int		marked[high - low];
 
 	idx.former = 0;
-	idx.latter = 0;
-	min.former = INT_MIN; //abs min
-	min.latter = start_node->content; //cur min
-	cur_node = start_node;
-	ft_memset(tmp, 0, high - low);
+	ft_memset(marked, 0, high - low);
 	while (idx.former < (int)(high - low))
 	{
+		min = INT_MAX;
+		min_idx = -1;
 		idx.latter = 0;
 		cur_node = start_node;
-		while (idx.latter++ < (int)(high - low))
+		while (idx.latter < (int)(high - low))
 		{
-			if (cur_node->content >= min.former && cur_node->content < min.latter)
-				min.latter = cur_node->content;
+			if (marked[idx.latter] == 1)
+				;
+			else if (cur_node->content <= min)
+			{
+				min = cur_node->content;
+				min_idx = idx.latter;
+			}
 			cur_node = get_next_node(cur_node, pos);
+			idx.latter++;
 		}
-		tmp[idx.former++] = min.latter;
-		min.former = min.latter;
+		marked[min_idx] = 1;
+		dsc_ord[idx.former++] = min;
 	}
-	pivot_v.former = tmp[(high - low) / 3 * 1];
-	pivot_v.latter = tmp[(high - low) / 3 * 2];
+	pivot_v.former = dsc_ord[(high - low) / 3 * 1 - 1];
+	pivot_v.latter = dsc_ord[(high - low) / 3 * 2 - 1];
 	return (pivot_v);
 }
 

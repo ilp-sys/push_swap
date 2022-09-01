@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/01 09:14:50 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/01 22:18:42 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	quick_sort(t_data data, size_t low, size_t high, int *pos);
 t_pair	partitioning(t_data data, size_t low, size_t high, int *pos);
 
 //push_swap_utils.c
-void	parse_err_exit();
+void	parse_err_exit(void);
 void	print_ops(t_node *ops);
 t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 t_node	*get_start_node(t_data data, int pos);
@@ -113,6 +113,5 @@ void	append_to_ops(t_deq *ops, int op);
 void	optimize_swap(t_deq *ops, int op);
 void	optimize_push(t_deq *ops, int op);
 void	optimize_rotate(t_deq *ops, int op);
-
 
 #endif
