@@ -6,19 +6,18 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/01 09:11:33 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/03 22:45:08 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-/*
 #include <stdio.h>
 void	print_queue(t_deq *deq)
 {
 	t_node 	*tmp;
 
-	printf("[STACK_A(%d)] ", deq->size);
+	printf("[STACK(%d)] ", deq->size);
 	tmp = deq->head;
 	while (tmp)
 	{
@@ -27,7 +26,6 @@ void	print_queue(t_deq *deq)
 	}
 	printf("\n");
 }
-*/
 
 void	sort_1(t_data data, int pos)
 {
@@ -54,32 +52,39 @@ void	sort_2(t_data data, int pos)
 
 int	check_type(t_node *start_node)
 {
-	const int num1 = start_node->content;
-	const int num2 = start_node->prev->content;
-	const int num3 = start_node->prev->prev->content;
+	const int	num1 = start_node->content;
+	const int	num2 = start_node->prev->content;
+	const int	num3 = start_node->prev->prev->content;
 
-	if (num1 < num2 && num1 < num2)
+	if (num1 < num2 && num1 < num3)
 	{
 		if (num2 < num3)
 			return (0);
 		else
 			return (1);
 	}
-	else if (num2 < num3 && num2 < num1)
+	else if (num2 < num1 && num2 < num3)
 	{
 		if (num1 < num3)
 			return (1);
 		else
 			return (2);
 	}
-	else //if (num3 < num1 && num3 < num1)
+	else
 	{
-		if (num1 > num2)
-			return (1);
-		else 
+		if (num1 < num2)
 			return (3);
+		else
+			return (1);
 	}
 }
+
+/*
+ * type0 = all sorted 
+ * type1 = swap
+ * type2 = rotate
+ * type3 = reverse rotate
+*/
 
 void	sort_3(t_data data, int pos)
 {
@@ -88,28 +93,49 @@ void	sort_3(t_data data, int pos)
 
 	i = 0;
 	if (pos % 3 != 1)
-		while (i < 3)
+		while (i++ < 3)
 			move_to_a_top(data, pos);
+	type = check_type(get_last_node(data.stack[0]));
 	while (1)
 	{
-		type = check_type(data.stack[0]->head);
 		if (type == 0)
-			break ;
+			return ;
 		else if (type == 1)
 		{
 			operation_swap(data.stack[0]);
 			append_to_ops(data.ops, sa);
 		}
-		else if (type == 2)
+		else if (type == 2) //이게 맞나
 		{
 			operation_rotate(data.stack[0]);
 			append_to_ops(data.ops, ra);
-		}
-		else if (type == 3)
-		{
+			operation_push(data.stack[0], data.stack[1]);
+			append_to_ops(data.ops, pb);
+			operation_push(data.stack[0], data.stack[1]);
+			append_to_ops(data.ops, pb);
 			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, pa);
+			operation_push(data.stack[1], data.stack[0]);
+			append_to_ops(data.ops, pa);
+			operation_push(data.stack[1], data.stack[0]);
+			append_to_ops(data.ops, pa);
+		}
+		else
+		{
+			operation_push(data.stack[0], data.stack[1]); //move top 2 to B
+			append_to_ops(data.ops, pb);
+			operation_push(data.stack[0], data.stack[1]);
+			append_to_ops(data.ops, pb);
+			operation_rotate(data.stack[0]); //move target to A btm
+			append_to_ops(data.ops, ra);
+			operation_push(data.stack[1], data.stack[0]); //revert to A 
+			append_to_ops(data.ops, pa);
+			operation_push(data.stack[1], data.stack[0]);
+			append_to_ops(data.ops, pa);
+			operation_reverse_rotate(data.stack[0]); //move last to A top -- rra 
 			append_to_ops(data.ops, rra);
 		}
+		type = check_type(get_last_node(data.stack[0]));
 	}
 }
 
@@ -146,7 +172,7 @@ int main(int argc, char *argv[])
 			ops->head = ops->head->prev;
 		}
 	}
-//	print_queue(stack_a); 
-//	print_queue(stack_b); 
+	print_queue(stack_a); 
+	print_queue(stack_b); 
 	return (0);
 }

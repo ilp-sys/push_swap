@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/02 00:22:00 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/03 14:33:21 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_node	*get_start_node(t_data data, int pos)
 	if (pos % 3 == 0)
 		start_node = data.stack[1]->head;
 	else if (pos % 3 == 1)
-		start_node = get_last_node(data.stack[0]);
+		start_node = data.stack[0]->head;
 	else
 		start_node = get_last_node(data.stack[1]);
 	return (start_node);
@@ -108,7 +108,7 @@ t_node	*get_start_node(t_data data, int pos)
 t_node	*get_next_node(t_node *node, int pos)
 {
 	if (pos % 3 == 2)
-		return (node->next);
-	else 
 		return (node->prev);
+	else
+		return (node->next);
 }

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/01 09:39:44 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/03 22:38:29 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,19 +126,20 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int *pos)
 	pivot_v = find_pivot(start_node, low, high, *pos);
 	while (high > low++)
 	{
+		start_node = get_start_node(data, *pos);
 		if (start_node->content < pivot_v.former)
 		{
 			part_i.former++;
-			cnt += move_to_a_top(data, *pos); //biggers
+			cnt += move_to_b_btm(data, *pos); //smallers
 		}
 		else if (start_node->content >= pivot_v.former && start_node->content <= pivot_v.latter)
 			cnt += move_to_b_top(data, *pos); //medians
 		else
 		{
-			part_i.latter++;
-			cnt += move_to_b_btm(data, *pos); //smallers
+			part_i.latter--;
+			cnt += move_to_a_top(data, *pos); //biggers
 		}
-		start_node = get_next_node(start_node, *pos);
+		start_node = get_start_node(data, *pos);
 	}
 	collect(data, *pos, cnt);
 	*pos = 1;
@@ -160,9 +161,9 @@ void	quick_sort(t_data data, size_t low, size_t high, int *pos)
 	{
 		tmp_pos = *pos;
 		pi = partitioning(data, low, high, pos);
-		quick_sort(data, low, pi.former, pos);
-		quick_sort(data, pi.former, pi.latter, pos);
 		quick_sort(data, pi.latter, high, pos);
+		quick_sort(data, pi.former + 1, pi.latter - 1, pos);
+		quick_sort(data, low, pi.former, pos);
 	}
 	*pos = tmp_pos;
 }
