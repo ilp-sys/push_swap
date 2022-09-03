@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/03 14:33:21 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/04 02:47:06 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)
 		marked[min_idx] = 1;
 		dsc_ord[idx.former++] = min;
 	}
-	pivot_v.former = dsc_ord[(high - low) / 3 * 1 - 1];
-	pivot_v.latter = dsc_ord[(high - low) / 3 * 2 - 1];
+//	pivot_v.former = dsc_ord[(high - low) / 3 * 1 - 1];
+//	pivot_v.latter = dsc_ord[(high - low) / 3 * 2 - 1];
+	pivot_v.former = dsc_ord[(high - low) / 3 * 1];
+	pivot_v.latter = dsc_ord[(high - low) / 3 * 2];
 	return (pivot_v);
 }
 

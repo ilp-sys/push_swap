@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/03 22:38:29 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/04 03:13:33 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ size_t	move_to_b_btm(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos % 3 == 1)
+	if (pos % 3 == 1) //TODO - check if this operations works intendedly
 	{
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
-		operation_rotate(data.stack[1]);
+		operation_rotate(data.stack[1]); //TODO - block this op when size of B is 0
 		append_to_ops(data.ops, rb);
 	}
 	else if (pos % 3 == 2)
@@ -139,7 +139,6 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int *pos)
 			part_i.latter--;
 			cnt += move_to_a_top(data, *pos); //biggers
 		}
-		start_node = get_start_node(data, *pos);
 	}
 	collect(data, *pos, cnt);
 	*pos = 1;
