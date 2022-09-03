@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/03 22:45:08 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/04 02:01:43 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,15 @@ void	sort_3(t_data data, int pos)
 		{
 			operation_rotate(data.stack[0]);
 			append_to_ops(data.ops, ra);
+			type = check_type(get_last_node(data.stack[0]));
+			if (type == 0)
+				return ;
 			operation_push(data.stack[0], data.stack[1]);
 			append_to_ops(data.ops, pb);
 			operation_push(data.stack[0], data.stack[1]);
 			append_to_ops(data.ops, pb);
 			operation_reverse_rotate(data.stack[0]);
-			append_to_ops(data.ops, pa);
+			append_to_ops(data.ops, rra);
 			operation_push(data.stack[1], data.stack[0]);
 			append_to_ops(data.ops, pa);
 			operation_push(data.stack[1], data.stack[0]);
@@ -122,16 +125,19 @@ void	sort_3(t_data data, int pos)
 		}
 		else
 		{
-			operation_push(data.stack[0], data.stack[1]); //move top 2 to B
-			append_to_ops(data.ops, pb);
-			operation_push(data.stack[0], data.stack[1]);
-			append_to_ops(data.ops, pb);
-			operation_rotate(data.stack[0]); //move target to A btm
-			append_to_ops(data.ops, ra);
-			operation_push(data.stack[1], data.stack[0]); //revert to A 
-			append_to_ops(data.ops, pa);
-			operation_push(data.stack[1], data.stack[0]);
-			append_to_ops(data.ops, pa);
+			if (get_queue_size(data.stack[0]) != 3)
+			{
+				operation_push(data.stack[0], data.stack[1]); //move top 2 to B
+				append_to_ops(data.ops, pb);
+				operation_push(data.stack[0], data.stack[1]);
+				append_to_ops(data.ops, pb);
+				operation_rotate(data.stack[0]); //move target to A btm
+				append_to_ops(data.ops, ra);
+				operation_push(data.stack[1], data.stack[0]); //revert to A 
+				append_to_ops(data.ops, pa);
+				operation_push(data.stack[1], data.stack[0]);
+				append_to_ops(data.ops, pa);
+			}
 			operation_reverse_rotate(data.stack[0]); //move last to A top -- rra 
 			append_to_ops(data.ops, rra);
 		}
@@ -164,15 +170,20 @@ int main(int argc, char *argv[])
 	{
 		get_input(argc, argv, stack_a); 	//parse
 		push_swap(stack_a, stack_b, ops); 	//sort
-		while (ops->head->next) 			//print
-			ops->head = ops->head->next;	//push front when you append
-		while (ops->head)
+	    if (ops->head)
 		{
-			print_ops(ops->head);
-			ops->head = ops->head->prev;
+			while (ops->head->next) 			//print
+				ops->head = ops->head->next;	//push front when you append
+			while (ops->head)
+			{
+				print_ops(ops->head);
+				ops->head = ops->head->prev;
+			}
 		}
 	}
+	printf("A_");
 	print_queue(stack_a); 
+	printf("B_");
 	print_queue(stack_b); 
 	return (0);
 }
