@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/04 02:01:43 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/04 21:17:34 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	sort_2(t_data data, int pos)
 	t_node	*a_top;
 
 	i = 0;
-	a_top = get_last_node(data.stack[0]);
 	if (pos % 3 != 1)
 		while (i++ < 2)
 			move_to_a_top(data, pos);
+	a_top = get_last_node(data.stack[0]);
 	if (a_top->content > a_top->prev->content)
 	{
 		operation_swap(data.stack[0]);

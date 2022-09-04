@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/04 03:13:33 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/04 21:57:21 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ size_t	move_to_a_top(t_data data, int pos)
 	}
 	else
 	{
-		operation_reverse_rotate(data.stack[1]);
-		append_to_ops(data.ops, rrb);
+		if (get_queue_size(data.stack[1]) != 1)
+		{
+			operation_reverse_rotate(data.stack[1]);
+			append_to_ops(data.ops, rrb);
+		}
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
 	}
@@ -67,12 +70,20 @@ size_t	move_to_b_btm(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos % 3 == 1) //TODO - check if this operations works intendedly
+	if (pos % 3 == 1)
 	{
+		if (get_queue_size(data.stack[0]) != 1)
+		{
+			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, rra);
+		}
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
-		operation_rotate(data.stack[1]); //TODO - block this op when size of B is 0
-		append_to_ops(data.ops, rb);
+		if (get_queue_size(data.stack[1]) != 1)
+		{
+			operation_rotate(data.stack[1]);
+			append_to_ops(data.ops, rb);
+		}
 	}
 	else if (pos % 3 == 2)
 	{
@@ -96,9 +107,9 @@ void	collect(t_data data, int pos, size_t cnt)
 {
 	t_node	*start_node;
 
-	start_node = data.stack[0]->head;
 	while (cnt--)
 	{
+		start_node = data.stack[0]->head;
 		operation_reverse_rotate(data.stack[0]);
 		append_to_ops(data.ops, rra);
 		operation_push(data.stack[0], data.stack[1]);
@@ -108,7 +119,6 @@ void	collect(t_data data, int pos, size_t cnt)
 			operation_rotate(data.stack[1]);
 			append_to_ops(data.ops, rb);
 		}
-		start_node = start_node->next;
 	}
 }
 
@@ -140,7 +150,8 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int *pos)
 			cnt += move_to_a_top(data, *pos); //biggers
 		}
 	}
-	collect(data, *pos, cnt);
+	if (cnt)
+		collect(data, *pos, cnt);
 	*pos = 1;
 	return (part_i);
 }
@@ -161,7 +172,7 @@ void	quick_sort(t_data data, size_t low, size_t high, int *pos)
 		tmp_pos = *pos;
 		pi = partitioning(data, low, high, pos);
 		quick_sort(data, pi.latter, high, pos);
-		quick_sort(data, pi.former + 1, pi.latter - 1, pos);
+		quick_sort(data, pi.former, pi.latter, pos);
 		quick_sort(data, low, pi.former, pos);
 	}
 	*pos = tmp_pos;
