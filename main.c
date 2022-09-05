@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/04 21:17:34 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/05 13:00:41 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ void	print_queue(t_deq *deq)
 		tmp = tmp->next;
 	}
 	printf("\n");
-}
-
-void	sort_1(t_data data, int pos)
-{
-	if (pos % 3 != 1)
-		move_to_a_top(data, pos);
 }
 
 void	sort_2(t_data data, int pos)
@@ -150,7 +144,7 @@ void	sort_small_num(t_data data, size_t high, size_t low, int pos)
 	if (high - low == 0)
 		return ;
 	else if (high - low == 1)
-		sort_1(data, pos);
+		move_to_a_top(data, pos);
 	else if (high - low == 2)
 		sort_2(data, pos);
 	else

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/04 21:57:21 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/05 12:45:56 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ size_t	move_to_a_top(t_data data, int pos)
 {
 	if (pos % 3 == 1)
 	{
-		operation_reverse_rotate(data.stack[0]);
-		append_to_ops(data.ops, rra);
+		if (get_queue_size(data.stack[0]) != 1)
+		{
+			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, rra);
+		}
 	}
 	else if (pos % 3 == 2)
 	{
