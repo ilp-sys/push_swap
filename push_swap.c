@@ -6,21 +6,35 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/05 15:44:18 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:02:58 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+#include <stdio.h>
+void	print_queue(t_deq *deq);
 
 size_t	move_to_a_top(t_data data, int pos)
 {
-	if (pos % 3 == 1)
+	size_t	cnt;
+
+	cnt = 0;
+	if (pos == 0)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
 			operation_reverse_rotate(data.stack[0]);
 			append_to_ops(data.ops, rra);
+		}
+	}
+	else if (pos % 3 == 1)
+	{
+		if (get_queue_size(data.stack[0]) != 1)
+		{
+			operation_rotate(data.stack[0]);
+			append_to_ops(data.ops, ra);
+			cnt++;
 		}
 	}
 	else if (pos % 3 == 2)
@@ -38,7 +52,7 @@ size_t	move_to_a_top(t_data data, int pos)
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
 	}
-	return (0);
+	return (cnt);
 }
 
 size_t	move_to_b_top(t_data data, int pos)
@@ -46,10 +60,15 @@ size_t	move_to_b_top(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos % 3 == 1)
+	if (pos == 0)
 	{
 		operation_reverse_rotate(data.stack[0]);
 		append_to_ops(data.ops, rra);
+		operation_push(data.stack[0], data.stack[1]);
+		append_to_ops(data.ops, pb);
+	}
+	else if (pos % 3 == 1)
+	{
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 	}
@@ -74,7 +93,7 @@ size_t	move_to_b_btm(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos % 3 == 1)
+	if (pos == 0)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
@@ -88,6 +107,13 @@ size_t	move_to_b_btm(t_data data, int pos)
 			operation_rotate(data.stack[1]);
 			append_to_ops(data.ops, rb);
 		}
+	}
+	else if (pos % 3 == 1)
+	{
+		operation_push(data.stack[0], data.stack[1]);
+		append_to_ops(data.ops, pb);
+		operation_rotate(data.stack[1]);
+		append_to_ops(data.ops, rb);
 	}
 	else if (pos % 3 == 2)
 	{
@@ -114,8 +140,13 @@ void	collect(t_data data, int pos, size_t cnt)
 	while (cnt--)
 	{
 		start_node = data.stack[0]->head;
-		operation_reverse_rotate(data.stack[0]);
-		append_to_ops(data.ops, rra);
+		if (get_queue_size(data.stack[0]) != 1)
+		{
+			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, rra);
+		}
+		if (pos == 1)
+			return ;
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 		if (pos % 3 == 0)
@@ -208,6 +239,8 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	part_i.latter = high;
 	start_node = get_start_node(data, pos);
 	pivot_v = find_pivot(start_node, low, high, pos);
+	printf("---------------------\n");
+	printf("[partitioning] (pos %d) high %zu low %zu | pivots %d %d\n", pos, high, low, pivot_v.former, pivot_v.latter);
 	while (high > low++)
 	{
 		start_node = get_start_node(data, pos);
@@ -226,6 +259,9 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	}
 	if (cnt)
 		collect(data, pos, cnt);
+	print_queue(data.stack[0]);
+	print_queue(data.stack[1]);
+	printf("-------------------------\n");
 	return (part_i);
 }
 
@@ -233,9 +269,14 @@ void	quick_sort(t_data data, size_t low, size_t high, int pos)
 {
 	t_pair	pi;
 
-	if (high - low <= 3)
+	if (high - low <= 4)
 	{
 		sort_small_num(data, high, low, pos);
+		printf("-----------------\n");
+		printf("[sort small num] (pos %d) low %zu high %zu\n", pos, low ,high);
+		print_queue(data.stack[0]);
+		print_queue(data.stack[1]);
+		printf("-----------------\n");
 		return ;
 	}
 	else
@@ -254,5 +295,5 @@ void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops)
 
 	data = init_data(stack_a, stack_b, ops);
 	size = get_queue_size(stack_a);
-	quick_sort(data, 0, size, 1);
+	quick_sort(data, 0, size, 0);
 }

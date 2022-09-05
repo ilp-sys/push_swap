@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/05 15:43:44 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:33:24 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,33 @@ void	sort_2(t_data data, int pos)
 		operation_swap(data.stack[0]);
 		append_to_ops(data.ops, sa);
 	}
+}
+
+void	sort_3(t_data data, int pos) //one pivot quick sort
+{
+	t_node	*start_node;
+
+	start_node = get_start_node(data, pos);
+}
+
+void	sort_4(t_data data, int pos) //one pivot quick sort
+{
+	t_node	*start_node;
+	t_pair	pivot_v;
+
+	start_node = get_start_node(data, pos);
+	pivot_v = find_pivot(start_node, 0, 4, pos);
+	for (int i = 0; i < 4; i++)
+	{
+		if (start_node->content <= pivot_v.former)
+			move_to_a_top(data, pos);
+		else
+			move_to_b_top(data, pos);
+	}
+	sort2(data, 1);
+	for (int i = 0; i < 2; i++)
+		move_to_a_top(data, pos);
+	sort2(data, 1);
 }
 
 int	check_type(t_node *start_node)
@@ -153,8 +180,10 @@ void	sort_small_num(t_data data, size_t high, size_t low, int pos)
 		sort_1(data, pos);
 	else if (high - low == 2)
 		sort_2(data, pos);
-	else
+	else if (high - low == 3)
 		sort_3(data, pos);
+	else
+		sort_4(data, pos);
 }
 
 int main(int argc, char *argv[])
