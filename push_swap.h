@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/05 15:46:39 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/06 18:56:44 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@
 
 # include "libft/libft.h"
 
-# define ASCEND 0
-# define DESCEND 1
+enum e_pos
+{
+	A_BTM = 0,
+	A_TOP,
+	B_TOP,
+	B_BTM
+};
 
 enum e_ops
 {

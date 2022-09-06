@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/05 22:02:58 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/06 18:56:29 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	move_to_a_top(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos == 0)
+	if (pos == A_BTM)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
@@ -28,7 +28,7 @@ size_t	move_to_a_top(t_data data, int pos)
 			append_to_ops(data.ops, rra);
 		}
 	}
-	else if (pos % 3 == 1)
+	else if (pos == A_TOP)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
@@ -37,7 +37,7 @@ size_t	move_to_a_top(t_data data, int pos)
 			cnt++;
 		}
 	}
-	else if (pos % 3 == 2)
+	else if (pos == B_TOP)
 	{
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
@@ -60,19 +60,19 @@ size_t	move_to_b_top(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos == 0)
+	if (pos == A_BTM)
 	{
 		operation_reverse_rotate(data.stack[0]);
 		append_to_ops(data.ops, rra);
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 	}
-	else if (pos % 3 == 1)
+	else if (pos == A_TOP)
 	{
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 	}
-	else if (pos % 3 == 2) //move to A btm tentatively
+	else if (pos == B_TOP) //move to A btm tentatively
 	{ 
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
@@ -93,7 +93,7 @@ size_t	move_to_b_btm(t_data data, int pos)
 	size_t	cnt;
 
 	cnt = 0;
-	if (pos == 0)
+	if (pos == A_BTM)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
@@ -108,14 +108,14 @@ size_t	move_to_b_btm(t_data data, int pos)
 			append_to_ops(data.ops, rb);
 		}
 	}
-	else if (pos % 3 == 1)
+	else if (pos== A_TOP)
 	{
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 		operation_rotate(data.stack[1]);
 		append_to_ops(data.ops, rb);
 	}
-	else if (pos % 3 == 2)
+	else if (pos == B_TOP)
 	{
 		operation_rotate(data.stack[1]);
 		append_to_ops(data.ops, rb);
@@ -282,9 +282,9 @@ void	quick_sort(t_data data, size_t low, size_t high, int pos)
 	else
 	{
 		pi = partitioning(data, low, high, pos);
-		quick_sort(data, pi.latter, high, 1);
-		quick_sort(data, pi.former, pi.latter, 2);
-		quick_sort(data, low, pi.former, 3);
+		quick_sort(data, pi.latter, high, A_TOP);
+		quick_sort(data, pi.former, pi.latter, B_TOP);
+		quick_sort(data, low, pi.former, B_BTM);
 	}
 }
 
@@ -295,5 +295,5 @@ void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops)
 
 	data = init_data(stack_a, stack_b, ops);
 	size = get_queue_size(stack_a);
-	quick_sort(data, 0, size, 0);
+	quick_sort(data, 0, size, A_BTM);
 }
