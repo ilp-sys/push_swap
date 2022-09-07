@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/06 18:56:44 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/07 20:05:32 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,19 @@ typedef struct s_pair
 
 //main.c
 int		main(int argc, char *argv[]);
-int		check_type(t_node *start_node);
-void	sort_small_num(t_data data, size_t high, size_t low, int pos);
+
+//check_sorted.c
+int		is_sorted(t_data data);
+int		is_sorted_sort_3(t_data data, int pos);
+int		is_sorted_sort_4(t_data data, int pos);
+
+//sort_small_num.c
+void	sort_1(t_data data, int pos);
 void	sort_2(t_data data, int pos);
 void	sort_3(t_data data, int pos);
+void	sort_4(t_data data, int pos);
+int		check_type(t_node *start_node);
+void	sort_small_num(t_data data, size_t high, size_t low, int pos);
 
 //parsing.c
 int		ft_atoi_protected(const char *str);
