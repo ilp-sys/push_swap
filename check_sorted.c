@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:38:57 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/07 23:00:35 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	is_sorted_sort_3(t_data data, int pos)
 	int num3 = start_node->content;
 
 	printf("%d %d %d\n", num1, num2, num3);
-	if ((pos == A_BTM && (num3 > num1 && num3 > num2)) || \
-			(pos == A_TOP && (num1 > num2 && num1 > num3)))
+	if ((pos == A_BTM && (num1 > num3 && num1 > num2)) || \
+			(pos == A_TOP && (num3 > num2 && num3 > num1)))
 	{
 		printf("case 1\n");
 		operation_rotate(data.stack[0]);

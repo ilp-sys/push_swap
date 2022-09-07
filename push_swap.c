@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:31:18 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/07 23:10:37 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	collect(t_data data, int pos, size_t cnt)
 			append_to_ops(data.ops, rra);
 		}
 		if (pos == 1)
-			return ;
+			continue ;
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 		if (pos % 3 == 0)
