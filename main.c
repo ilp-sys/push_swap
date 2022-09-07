@@ -6,13 +6,12 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:06:32 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/07 20:21:03 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-#include <stdio.h>
 void	print_queue(t_deq *deq)
 {
 	t_node 	*tmp;
@@ -26,13 +25,6 @@ void	print_queue(t_deq *deq)
 	}
 	printf("\n");
 }
-
-/*
- * type0 = all sorted 
- * type1 = swap
- * type2 = rotate
- * type3 = reverse rotate
-*/
 
 int main(int argc, char *argv[])
 {

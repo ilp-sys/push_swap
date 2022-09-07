@@ -6,11 +6,11 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:03:04 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/07 20:38:57 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.c"
+#include "push_swap.h"
 
 int	is_sorted_sort_3(t_data data, int pos)
 {
