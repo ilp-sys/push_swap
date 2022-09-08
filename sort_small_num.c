@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:03:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 22:55:41 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/08 19:26:08 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,9 @@ void	sort_3(t_data data, int pos) //single pivot quick sort
 	start_node = get_start_node(data, pos);
 	sorted = is_sorted_sort_3(data, pos);
 	if (sorted == -1)
-	{
-		if (pos != A_TOP && pos != A_BTM)
-			for (int i = 0; i < 3; i++)
-				move_to_a_top(data, pos);
 		return ;
-	}
 	else
 		median = sorted;
-	printf("sorted3 sorted val %d\n", sorted);
 	for (int i = 0; i < 3; i++)
 	{
 		if (start_node->content >= median)

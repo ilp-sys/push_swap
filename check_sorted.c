@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/08 12:21:47 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/08 19:25:07 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,49 @@ int	is_sorted_sort_3(t_data data, int pos)
 	start_node = get_next_node(start_node, pos);
 	int num3 = start_node->content;
 
-	printf("%d %d %d\n", num1, num2, num3);
-	if ((pos == A_BTM && (num3 > num1 && num3 > num2)) || \
-			(pos == A_TOP && (num1 > num2 && num1 > num3)))
+	if (pos == A_BTM && (num1 < num2 && num1 < num3))
 	{
-		printf("case 1\n");
+		sort_2(data, A_TOP);
+		operation_reverse_rotate(data.stack[0]);
+		append_to_ops(data.ops, rra);
+	}
+	else if (pos == A_BTM && (num3 > num1 && num3 > num2))
+	{
 		operation_rotate(data.stack[0]);
 		append_to_ops(data.ops, ra);
 		sort_2(data, A_TOP);
-		return (-1);
 	}
-	else if (pos % 2 && (num3 > num2 && num3 > num1))
+	else if (pos == A_BTM && (num1 > num2 && num1 > num3) ||\
+			pos == A_TOP && (num3 > num1 && num3 > num2))
+		sort_2(data, A_TOP);
+	else if (pos == A_BTM && (num3 < num1 && num3 < num2) ||\
+			pos == A_TOP && (num1 < num2 && num1 < num3))
 	{
-		printf("case 2\n");
-		if (pos == B_BTM)
-			for (int i = 0; i < 3; i++)
-				move_to_a_top(data, pos);
-		if (num1 > num2)
+		if (pos == A_TOP && (num2 > num3) ||\
+				pos == A_BTM && (num1 < num2))
 		{
-			operation_swap(data.stack[0]);
-			append_to_ops(data.ops, sa);
+			operation_rotate(data.stack[0]);
+			append_to_ops(data.ops, ra);
+			sort_2(data, A_TOP);
+			operation_reverse_rotate(data.stack[0]);
+			append_to_ops(data.ops, rra);
 		}
-		return (-1);
 	}
-	else if (!(pos % 2) && (num3 > num1 && num3 > num2))
+	else if ((num1 > num2 && num1 > num3) && (pos == B_TOP || pos == B_BTM))
 	{
-		printf("case 3\n");
-		if (pos == B_BTM)
-			for (int i = 0; i < 3; i++)
-				move_to_a_top(data, pos);
-		if (num2 < num3)
-		{
-			operation_swap(data.stack[0]);
-			append_to_ops(data.ops, sa);
-		}
-		return (-1);
+		for (int i = 0; i < 3; i++)
+			move_to_a_top(data, pos);
+		sort_2(data, A_TOP);
+	}
+	else if ((num3 < num1 && num3 < num2) && (pos == B_TOP || pos == B_BTM))
+	{
+		move_to_a_top(data, pos);
+		move_to_a_top(data, pos);
+		sort_2(data, A_TOP);
+		move_to_a_top(data, pos);
 	}
 	else //return median
 	{
-		printf("case else\n");
 		if ((num1 < num2 && num1 > num3) || (num1 > num2 && num1 < num3))
 			return (num1);
 		else if ((num2 > num1 && num2 < num3) || (num2 < num1 && num2 > num3))
@@ -67,6 +71,7 @@ int	is_sorted_sort_3(t_data data, int pos)
 		else
 			return (num3);
 	}
+	return (-1);
 }
 
 int	is_sorted_sort_4(t_data data, int pos)

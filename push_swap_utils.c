@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:30:48 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/05 19:11:37 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/08 19:34:23 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)
 	int		marked[high - low];
 
 	idx.former = 0;
-	//ft_memset(marked, 0, high - low);
 	for (int i = 0; i < (int)(high - low); i++)
 		marked[i] = 0;
 	while (idx.former < (int)(high - low))
@@ -89,8 +88,6 @@ t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos)
 		marked[min_idx] = 1;
 		dsc_ord[idx.former++] = min;
 	}
-//	pivot_v.former = dsc_ord[(high - low) / 3 * 1 - 1];
-//	pivot_v.latter = dsc_ord[(high - low) / 3 * 2 - 1];
 	pivot_v.former = dsc_ord[(high - low) / 3 * 1];
 	pivot_v.latter = dsc_ord[(high - low) / 3 * 2];
 	return (pivot_v);
