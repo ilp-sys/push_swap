@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:38:28 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 17:42:02 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 18:36:55 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ void	optimize_rotate(t_deq *ops, int op)
 		ops->head->content = rrr;
 	else if (num == ra + rb)
 		ops->head->content = rr;
-	else if (num == ra + rra || \
-			num == rb + rrb || \
-			num == rr + rrr)
-		queue_pop_front(ops);
 	else
 		queue_push_front(ops, get_new_node(op));
 }
@@ -68,11 +64,11 @@ void	append_to_ops(t_deq *ops, int op)
 		else if ((op == pa || op == pb) && \
 				(prev_op == pa || prev_op == pb))
 			optimize_push(ops, op);
-//		else if ((op == ra || op == rb || op == rr || \
-//				op == rra || op == rrb || op == rrr) && \
-//				(prev_op == ra || prev_op == rb || prev_op == rr || \
-//				prev_op == rra || prev_op == rrb || prev_op == rrr))
-//			optimize_rotate(ops, op);
+		else if ((op == ra || op == rb || op == rr || \
+				op == rra || op == rrb || op == rrr) && \
+				(prev_op == ra || prev_op == rb || prev_op == rr || \
+				prev_op == rra || prev_op == rrb || prev_op == rrr))
+			optimize_rotate(ops, op);
 		else
 			queue_push_front(ops, get_new_node(op));
 	}

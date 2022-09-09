@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:30:43 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 21:16:37 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
+#include <stdio.h>
 
 # include "libft/libft.h"
 
@@ -81,6 +81,8 @@ void	sort_1(t_data data, int pos);
 void	sort_2(t_data data, int pos);
 void	sort_3(t_data data, int pos);
 void	sort_4(t_data data, int pos);
+
+//sort_small_num_utils.c
 int		check_type(t_node *start_node);
 void	sort_small_num(t_data data, size_t high, size_t low, int pos);
 
@@ -101,19 +103,24 @@ void	push_swap(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 void	quick_sort(t_data data, size_t low, size_t high, int pos);
 t_pair	partitioning(t_data data, size_t low, size_t high, int pos);
 
-//push_swap_utils.c
+//push_swap_utils_1.c
+void	set_pair(t_pair *pair, int former, int latter);
+t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos);
+
+//push_swap_utils_2.c
 void	parse_err_exit(void);
 void	print_ops(t_node *ops);
 t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 t_node	*get_start_node(t_data data, int pos);
 t_node	*get_next_node(t_node *node, int pos);
-t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos);
 
-//queue_utils.c
+//queue_utils_1.c
 t_node	*queue_pop_back(t_deq *queue);
 t_node	*queue_pop_front(t_deq *queue);
 void	queue_push_back(t_deq *queue, t_node *node);
 void	queue_push_front(t_deq *queue, t_node *node);
+
+//queue_utils_1.c
 t_node	*get_new_node(int content);
 size_t	get_queue_size(t_deq *queue);
 t_node	*get_last_node(t_deq *queue);
@@ -131,5 +138,4 @@ void	optimize_swap(t_deq *ops, int op);
 void	optimize_push(t_deq *ops, int op);
 void	optimize_rotate(t_deq *ops, int op);
 
-void	print_queue(t_deq *deq);
 #endif

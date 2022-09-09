@@ -6,25 +6,11 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:03:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 17:32:09 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 21:16:17 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	sort_small_num(t_data data, size_t high, size_t low, int pos)
-{
-	if (high - low == 0)
-		return ;
-	else if (high - low == 1)
-		sort_1(data, pos);
-	else if (high - low == 2)
-		sort_2(data, pos);
-	else if (high - low == 3)
-		sort_3(data, pos);
-	else
-		sort_4(data, pos);
-}
 
 void	sort_1(t_data data, int pos)
 {
@@ -49,13 +35,15 @@ void	sort_2(t_data data, int pos)
 	}
 }
 
-void	sort_3(t_data data, int pos) //single pivot quick sort
+void	sort_3(t_data data, int pos)
 {
-	int	cnt;
-	int	sorted;
-	int median;
+	int		i;
+	int		cnt;
+	int		sorted;
+	int		median;
 	t_node	*start_node;
 
+	i = 0;
 	cnt = 0;
 	start_node = get_start_node(data, pos);
 	sorted = is_sorted_sort_3(data, pos);
@@ -63,7 +51,7 @@ void	sort_3(t_data data, int pos) //single pivot quick sort
 		return ;
 	else
 		median = find_pivot(start_node, 0, 3, pos).former;
-	for (int i = 0; i < 3; i++)
+	while (i++ < 3)
 	{
 		if (start_node->content >= median)
 			cnt += move_to_a_top(data, pos);
@@ -72,13 +60,13 @@ void	sort_3(t_data data, int pos) //single pivot quick sort
 		start_node = get_start_node(data, pos);
 	}
 	if (cnt)
-		collect(data, pos, cnt); //collect in case of pos equals 1
+		collect(data, pos, cnt);
 	sort_2(data, A_TOP);
 	operation_push(data.stack[1], data.stack[0]);
 	append_to_ops(data.ops, pa);
 }
 
-void	sort_4(t_data data, int pos) //single pivot quick sort
+void	sort_4(t_data data, int pos)
 {
 	int		cnt;
 	t_node	*start_node;
@@ -101,7 +89,7 @@ void	sort_4(t_data data, int pos) //single pivot quick sort
 		if (start_node->content > pivot_v.former)
 			cnt += move_to_a_top(data, pos);
 		else
-			cnt += move_to_b_top(data, pos); //can optimize, move to somewhere other than B_TOP in case of pos is B_TOP
+			cnt += move_to_b_top(data, pos);
 		start_node = get_start_node(data, pos);
 	}
 	if (cnt)
@@ -111,33 +99,3 @@ void	sort_4(t_data data, int pos) //single pivot quick sort
 		move_to_a_top(data, B_TOP);
 	sort_2(data, A_TOP);
 }
-
-int	check_type(t_node *start_node)
-{
-	const int	num1 = start_node->content;
-	const int	num2 = start_node->prev->content;
-	const int	num3 = start_node->prev->prev->content;
-
-	if (num1 < num2 && num1 < num3)
-	{
-		if (num2 < num3)
-			return (0);
-		else
-			return (1);
-	}
-	else if (num2 < num1 && num2 < num3)
-	{
-		if (num1 < num3)
-			return (1);
-		else
-			return (2);
-	}
-	else
-	{
-		if (num1 < num2)
-			return (3);
-		else
-			return (1);
-	}
-}
-

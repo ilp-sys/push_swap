@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:19:59 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/07 20:39:15 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 18:41:56 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ size_t	move_to_b_top(t_data data, int pos)
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
 	}
-	else if (pos == B_TOP) //move to A btm tentatively
-	{ 
+	else if (pos == B_TOP)
+	{
 		operation_push(data.stack[1], data.stack[0]);
 		append_to_ops(data.ops, pa);
 		operation_rotate(data.stack[0]);
 		append_to_ops(data.ops, ra);
 		cnt++;
 	}
-	else 
+	else
 	{
 		operation_reverse_rotate(data.stack[1]);
 		append_to_ops(data.ops, rrb);
@@ -105,7 +105,7 @@ size_t	move_to_b_btm(t_data data, int pos)
 			append_to_ops(data.ops, rb);
 		}
 	}
-	else if (pos== A_TOP)
+	else if (pos == A_TOP)
 	{
 		operation_push(data.stack[0], data.stack[1]);
 		append_to_ops(data.ops, pb);
@@ -117,7 +117,7 @@ size_t	move_to_b_btm(t_data data, int pos)
 		operation_rotate(data.stack[1]);
 		append_to_ops(data.ops, rb);
 	}
-	else //move to A btm tentatively
+	else
 	{
 		operation_reverse_rotate(data.stack[1]);
 		append_to_ops(data.ops, rrb);
@@ -129,4 +129,3 @@ size_t	move_to_b_btm(t_data data, int pos)
 	}
 	return (cnt);
 }
-

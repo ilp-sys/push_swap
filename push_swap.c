@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 16:06:56 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 21:15:57 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,28 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	t_node	*start_node;
 
 	cnt = 0;
-	part_i.former = low;
-	part_i.latter = high;
+	set_pair(&part_i, low, high);
 	start_node = get_start_node(data, pos);
 	pivot_v = find_pivot(start_node, low, high, pos);
-	//printf("[partitioning] (%d) %zu %zu | %d %d\n", pos, low, high, pivot_v.former, pivot_v.latter);
 	while (high > low++)
 	{
 		start_node = get_start_node(data, pos);
 		if (start_node->content < pivot_v.former)
 		{
 			part_i.former++;
-			cnt += move_to_b_btm(data, pos); //smallers
+			cnt += move_to_b_btm(data, pos);
 		}
-		else if (start_node->content >= pivot_v.former && start_node->content <= pivot_v.latter)
-			cnt += move_to_b_top(data, pos); //medians
+		else if (start_node->content >= pivot_v.former \
+				&& start_node->content <= pivot_v.latter)
+			cnt += move_to_b_top(data, pos);
 		else
 		{
 			part_i.latter--;
-			cnt += move_to_a_top(data, pos); //biggers
+			cnt += move_to_a_top(data, pos);
 		}
 	}
 	if (cnt)
 		collect(data, pos, cnt);
-	//print_queue(data.stack[0]);
-	//print_queue(data.stack[1]);
-	//printf("-------------------------\n");
 	return (part_i);
 }
 
@@ -79,11 +75,7 @@ void	quick_sort(t_data data, size_t low, size_t high, int pos)
 
 	if (high - low <= 4)
 	{
-		//printf("[sort_samll] (%d) %zu %zu\n", pos, low, high);
 		sort_small_num(data, high, low, pos);
-		//print_queue(data.stack[0]);
-		//print_queue(data.stack[1]);
-		//printf("-------------------------\n");
 		return ;
 	}
 	else
