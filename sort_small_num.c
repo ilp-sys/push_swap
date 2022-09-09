@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:03:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/08 19:26:08 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:32:09 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	sort_3(t_data data, int pos) //single pivot quick sort
 	if (sorted == -1)
 		return ;
 	else
-		median = sorted;
+		median = find_pivot(start_node, 0, 3, pos).former;
 	for (int i = 0; i < 3; i++)
 	{
 		if (start_node->content >= median)

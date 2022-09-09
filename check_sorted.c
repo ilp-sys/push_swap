@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 16:05:22 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:20:15 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,21 @@ int	is_sorted_sort_3(t_data data, int pos)
 		sort_2(data, A_TOP);
 		operation_reverse_rotate(data.stack[0]);
 		append_to_ops(data.ops, rra);
+		return (-1);
 	}
 	else if (pos == A_BTM && (num3 > num1 && num3 > num2))
 	{
 		operation_rotate(data.stack[0]);
 		append_to_ops(data.ops, ra);
 		sort_2(data, A_TOP);
+		return (-1);
 	}
 	else if (pos == A_BTM && (num1 > num2 && num1 > num3) ||\
 			pos == A_TOP && (num3 > num1 && num3 > num2))
+	{
 		sort_2(data, A_TOP);
+		return (-1);
+	}
 	else if (pos == A_BTM && (num3 < num1 && num3 < num2) ||\
 			pos == A_TOP && (num1 < num2 && num1 < num3))
 	{
@@ -48,12 +53,14 @@ int	is_sorted_sort_3(t_data data, int pos)
 			operation_reverse_rotate(data.stack[0]);
 			append_to_ops(data.ops, rra);
 		}
+		return (-1);
 	}
 	else if ((num1 > num2 && num1 > num3) && (pos == B_TOP || pos == B_BTM))
 	{
 		for (int i = 0; i < 3; i++)
 			move_to_a_top(data, pos);
 		sort_2(data, A_TOP);
+		return (-1);
 	}
 	else if ((num3 < num1 && num3 < num2) && (pos == B_TOP || pos == B_BTM))
 	{
@@ -61,17 +68,10 @@ int	is_sorted_sort_3(t_data data, int pos)
 		move_to_a_top(data, pos);
 		sort_2(data, A_TOP);
 		move_to_a_top(data, pos);
+		return (-1);
 	}
-	else //return median
-	{
-		if ((num1 < num2 && num1 > num3) || (num1 > num2 && num1 < num3))
-			return (num1);
-		else if ((num2 > num1 && num2 < num3) || (num2 < num1 && num2 > num3))
-			return (num2);
-		else
-			return (num3);
-	}
-	return (-1);
+	else
+		return (0);
 }
 
 int	is_sorted_sort_4(t_data data, int pos)
