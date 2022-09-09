@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/08 19:25:07 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:05:22 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int	is_sorted_sort_4(t_data data, int pos)
 		nums[i] = start_node->content;
 		start_node = get_next_node(start_node, pos);
 	}
-	if ((pos % 2) && (nums[0] < nums[1] && nums[0] < nums[2] && nums[0] < nums[3]))
+	if ((pos == A_TOP) && (nums[0] < nums[1] && nums[0] < nums[2] && nums[0] < nums[3]))
 	{
 		if (nums[1] < nums[2] && nums[1] < nums[3])
 			if (nums[2] < nums[3])
 				ret_val = -1;
 	}
-	else if (!(pos % 2) && (nums[3] < nums[2] && nums[3] < nums[1] && nums[3] < nums[0]))
+	else if ((pos != A_TOP) && (nums[3] < nums[2] && nums[3] < nums[1] && nums[3] < nums[0]))
 	{
 		if (nums[2] < nums[1] && nums[2] < nums[0])
 			if (nums[1] < nums[0])

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/08 19:28:19 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:06:56 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	part_i.latter = high;
 	start_node = get_start_node(data, pos);
 	pivot_v = find_pivot(start_node, low, high, pos);
+	//printf("[partitioning] (%d) %zu %zu | %d %d\n", pos, low, high, pivot_v.former, pivot_v.latter);
 	while (high > low++)
 	{
 		start_node = get_start_node(data, pos);
@@ -66,6 +67,9 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	}
 	if (cnt)
 		collect(data, pos, cnt);
+	//print_queue(data.stack[0]);
+	//print_queue(data.stack[1]);
+	//printf("-------------------------\n");
 	return (part_i);
 }
 
@@ -75,7 +79,11 @@ void	quick_sort(t_data data, size_t low, size_t high, int pos)
 
 	if (high - low <= 4)
 	{
+		//printf("[sort_samll] (%d) %zu %zu\n", pos, low, high);
 		sort_small_num(data, high, low, pos);
+		//print_queue(data.stack[0]);
+		//print_queue(data.stack[1]);
+		//printf("-------------------------\n");
 		return ;
 	}
 	else

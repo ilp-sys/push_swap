@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:38:28 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/04 01:35:49 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:03:41 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	append_to_ops(t_deq *ops, int op)
 		else if ((op == pa || op == pb) && \
 				(prev_op == pa || prev_op == pb))
 			optimize_push(ops, op);
-		else if ((op == ra || op == rb || op == rr || \
-				op == rra || op == rrb || op == rrr) && \
-				(prev_op == ra || prev_op == rb || prev_op == rr || \
-				prev_op == rra || prev_op == rrb || prev_op == rrr))
-			optimize_rotate(ops, op);
+//		else if ((op == ra || op == rb || op == rr || \
+//				op == rra || op == rrb || op == rrr) && \
+//				(prev_op == ra || prev_op == rb || prev_op == rr || \
+//				prev_op == rra || prev_op == rrb || prev_op == rrr))
+//			optimize_rotate(ops, op);
 		else
 			queue_push_front(ops, get_new_node(op));
 	}

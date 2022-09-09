@@ -6,14 +6,14 @@
 #    By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/09 14:00:43 by jiwahn            #+#    #+#              #
-#    Updated: 2022/09/09 14:14:23 by jiwahn           ###   ########.fr        #
+#    Updated: 2022/09/09 14:37:29 by jiwahn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm
 RMFLAGS = -rf
