@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 21:15:35 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/09 21:38:02 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,10 @@ int	is_sorted_sort_3(t_data data, int pos)
 int	is_sorted_sort_4(t_data data, int pos)
 {
 	int		i;
-	int		ret_val;
 	t_node	*start_node;
 	int		nums[4];
 
 	i = 0;
-	ret_val = 0;
 	start_node = get_start_node(data, pos);
 	while (i < 4)
 	{
@@ -95,20 +93,12 @@ int	is_sorted_sort_4(t_data data, int pos)
 		start_node = get_next_node(start_node, pos);
 	}
 	if ((pos == A_TOP) && \
-			(nums[0] < nums[1] && nums[0] < nums[2] && nums[0] < nums[3]))
-	{
-		if (nums[1] < nums[2] && nums[1] < nums[3])
-			if (nums[2] < nums[3])
-				ret_val = -1;
-	}
+			(nums[0] < nums[1] && nums[1] < nums[2] && nums[2] < nums[3]))
+		return (-1);
 	else if ((pos != A_TOP) && \
-			(nums[3] < nums[2] && nums[3] < nums[1] && nums[3] < nums[0]))
-	{
-		if (nums[2] < nums[1] && nums[2] < nums[0])
-			if (nums[1] < nums[0])
-				ret_val = -1;
-	}
-	return (ret_val);
+		(nums[0] > nums[1] && nums[1] > nums[2] && nums[2] > nums[3]))
+		return (-1);
+	return (0);
 }
 
 int	is_sorted(t_data data)
