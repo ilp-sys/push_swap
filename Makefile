@@ -6,7 +6,7 @@
 #    By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/09 14:00:43 by jiwahn            #+#    #+#              #
-#    Updated: 2022/09/09 14:37:29 by jiwahn           ###   ########.fr        #
+#    Updated: 2022/09/10 19:53:15 by jiwahn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ LIBFT_DIR = libft/
 LIBFT_LIB = libft.a
 
 SRCS = main.c adding_operation.c check_sorted.c sort_small_num.c \
-	   push_swap.c move_to.c operations.c parsing.c push_swap_utils.c \
-	   queue_utils.c
+	   push_swap.c move_to.c operations.c parsing.c push_swap_utils_1.c \
+	   queue_utils_1.c check_sorted_sort_3.c execute_append.c \
+	   push_swap_utils_2.c queue_utils_2.c sort_small_num_utils.c
 	  
 OBJ_DIR = obj/
 OBJS = $(SRCS:.c=.o)
@@ -39,8 +40,6 @@ fclean : clean
 
 re: fclean all
 
-bonus : all
-
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) re
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT_LIB) -o $@
@@ -48,4 +47,4 @@ $(NAME) : $(OBJS)
 $(OBJS) : $(SRCS)
 	@$(CC) $(CFLAGS) $^ -c
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

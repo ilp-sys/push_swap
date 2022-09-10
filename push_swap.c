@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 16:38:01 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 19:46:00 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,31 @@ void	collect(t_data data, int pos, size_t cnt)
 	}
 }
 
+size_t	partition_sub(t_pair *part_i, t_data data, int pos, int flag)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	if (flag)
+	{
+		(part_i->former)++;
+		cnt += move_to_b_btm(data, pos);
+	}
+	else
+	{
+		(part_i->latter)--;
+		cnt += move_to_a_top(data, pos);
+	}
+	return (cnt);
+}
+
 t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 {
 	size_t			cnt;
 	t_pair			part_i;
 	t_node			*start_node;
-	const t_pair	pivot_v = find_pivot(get_start_node(data, pos), high - low, pos);
+	const t_pair	pivot_v = find_pivot(get_start_node(data, pos), \
+			high - low, pos);
 
 	cnt = 0;
 	set_pair(&part_i, low, high);
@@ -49,18 +68,12 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 	{
 		start_node = get_start_node(data, pos);
 		if (start_node->content < pivot_v.former)
-		{
-			part_i.former++;
-			cnt += move_to_b_btm(data, pos);
-		}
+			cnt += partition_sub(&part_i, data, pos, 1);
 		else if (start_node->content >= pivot_v.former \
 				&& start_node->content <= pivot_v.latter)
 			cnt += move_to_b_top(data, pos);
 		else
-		{
-			part_i.latter--;
-			cnt += move_to_a_top(data, pos);
-		}
+			cnt += partition_sub(&part_i, data, pos, 0);
 	}
 	if (cnt)
 		collect(data, pos, cnt);
