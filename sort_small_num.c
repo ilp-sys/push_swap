@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:03:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 15:55:20 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:24:06 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	sort_3(t_data data, int pos)
 {
 	int		i;
 	int		cnt;
-	int		sorted;
 	int		median;
 	t_node	*start_node;
 

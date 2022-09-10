@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:19:59 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 14:45:10 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:24:18 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ size_t	move_to_iter(t_data data, int iter, int pos, \
 {
 	size_t	cnt;
 
+	cnt = 0;
 	while (iter--)
 		cnt += f(data, pos);
 	return (cnt);
@@ -30,34 +31,23 @@ size_t	move_to_a_top(t_data data, int pos)
 	if (pos == A_BTM)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
-		{
-			operation_reverse_rotate(data.stack[0]);
-			append_to_ops(data.ops, rra);
-		}
+			execute_append(data, rra);
 	}
 	else if (pos == A_TOP)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
 		{
-			operation_rotate(data.stack[0]);
-			append_to_ops(data.ops, ra);
+			execute_append(data, ra);
 			cnt++;
 		}
 	}
 	else if (pos == B_TOP)
-	{
-		operation_push(data.stack[1], data.stack[0]);
-		append_to_ops(data.ops, pa);
-	}
+		execute_append(data, pa);
 	else
 	{
 		if (get_queue_size(data.stack[1]) != 1)
-		{
-			operation_reverse_rotate(data.stack[1]);
-			append_to_ops(data.ops, rrb);
-		}
-		operation_push(data.stack[1], data.stack[0]);
-		append_to_ops(data.ops, pa);
+			execute_append(data, rrb);
+		execute_append(data, pa);
 	}
 	return (cnt);
 }
@@ -69,29 +59,19 @@ size_t	move_to_b_top(t_data data, int pos)
 	cnt = 0;
 	if (pos == A_BTM)
 	{
-		operation_reverse_rotate(data.stack[0]);
-		append_to_ops(data.ops, rra);
-		operation_push(data.stack[0], data.stack[1]);
-		append_to_ops(data.ops, pb);
+		execute_append(data, rra);
+		execute_append(data, pb);
 	}
 	else if (pos == A_TOP)
-	{
-		operation_push(data.stack[0], data.stack[1]);
-		append_to_ops(data.ops, pb);
-	}
+		execute_append(data, pb);
 	else if (pos == B_TOP)
 	{
-		operation_push(data.stack[1], data.stack[0]);
-		append_to_ops(data.ops, pa);
-		operation_rotate(data.stack[0]);
-		append_to_ops(data.ops, ra);
+		execute_append(data, pa);
+		execute_append(data, ra);
 		cnt++;
 	}
 	else
-	{
-		operation_reverse_rotate(data.stack[1]);
-		append_to_ops(data.ops, rrb);
-	}
+		execute_append(data, rrb);
 	return (cnt);
 }
 
@@ -103,38 +83,23 @@ size_t	move_to_b_btm(t_data data, int pos)
 	if (pos == A_BTM)
 	{
 		if (get_queue_size(data.stack[0]) != 1)
-		{
-			operation_reverse_rotate(data.stack[0]);
-			append_to_ops(data.ops, rra);
-		}
-		operation_push(data.stack[0], data.stack[1]);
-		append_to_ops(data.ops, pb);
+			execute_append(data, rra);
+		execute_append(data, pb);
 		if (get_queue_size(data.stack[1]) != 1)
-		{
-			operation_rotate(data.stack[1]);
-			append_to_ops(data.ops, rb);
-		}
+			execute_append(data, rb);
 	}
 	else if (pos == A_TOP)
 	{
-		operation_push(data.stack[0], data.stack[1]);
-		append_to_ops(data.ops, pb);
-		operation_rotate(data.stack[1]);
-		append_to_ops(data.ops, rb);
+		execute_append(data, pb);
+		execute_append(data, rb);
 	}
 	else if (pos == B_TOP)
-	{
-		operation_rotate(data.stack[1]);
-		append_to_ops(data.ops, rb);
-	}
+		execute_append(data, rb);
 	else
 	{
-		operation_reverse_rotate(data.stack[1]);
-		append_to_ops(data.ops, rrb);
-		operation_push(data.stack[1], data.stack[0]);
-		append_to_ops(data.ops, pa);
-		operation_rotate(data.stack[0]);
-		append_to_ops(data.ops, ra);
+		execute_append(data, rrb);
+		execute_append(data, pa);
+		execute_append(data, ra);
 		cnt++;
 	}
 	return (cnt);
