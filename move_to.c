@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:19:59 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 17:24:18 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 19:34:47 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ size_t	move_to_b_top(t_data data, int pos)
 	return (cnt);
 }
 
+static void	move_to_b_btm_else(t_data data)
+{
+	execute_append(data, rrb);
+	execute_append(data, pa);
+	execute_append(data, ra);
+}
+
 size_t	move_to_b_btm(t_data data, int pos)
 {
 	size_t	cnt;
@@ -97,9 +104,7 @@ size_t	move_to_b_btm(t_data data, int pos)
 		execute_append(data, rb);
 	else
 	{
-		execute_append(data, rrb);
-		execute_append(data, pa);
-		execute_append(data, ra);
+		move_to_b_btm_else(data);
 		cnt++;
 	}
 	return (cnt);

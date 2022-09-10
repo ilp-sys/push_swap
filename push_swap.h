@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 16:58:18 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 19:30:10 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ int		main(int argc, char *argv[]);
 
 //check_sorted.c
 int		is_sorted(t_data data);
-int		is_sorted_sort_3(t_data data, int pos);
 int		is_sorted_sort_4(t_data data, int pos);
+
+//check_sorted_sort_3.c
+int		is_sorted_sort_3(t_data data, int pos);
 
 //sort_small_num.c
 void	sort_1(t_data data, int pos);
