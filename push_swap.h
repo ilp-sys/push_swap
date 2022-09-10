@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 21:21:28 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:55:23 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	get_input(int argc, char *argv[], t_deq *stack_a);
 void	free_split(char **splitted);
 
 //move_to.c
+size_t	move_to_iter(t_data data, int cnt, int pos, \
+		size_t (*f)(t_data data, int pos));
 size_t	move_to_a_top(t_data data, int pos);
 size_t	move_to_b_top(t_data data, int pos);
 size_t	move_to_b_btm(t_data data, int pos);
@@ -104,7 +106,7 @@ t_pair	partitioning(t_data data, size_t low, size_t high, int pos);
 
 //push_swap_utils_1.c
 void	set_pair(t_pair *pair, int former, int latter);
-t_pair	find_pivot(t_node *start_node, size_t low, size_t high, int pos);
+t_pair	find_pivot(t_node *start_node, int size, int pos);
 
 //push_swap_utils_2.c
 void	parse_err_exit(void);

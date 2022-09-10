@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 15:08:41 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 18:47:04 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 14:15:51 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,37 @@ void	free_split(char **splitted)
 	free(splitted);
 }
 
+static void	check_err(char c)
+{
+	if (!(c >= '0' && c <= '9'))
+		parse_err_exit();
+}
+
 int	ft_atoi_protected(const char *str)
 {
 	int			sign;
-	int			flag;
 	long long	result;
 
 	sign = 1;
 	result = 0;
-	flag = 0;
 	while (*str == ' ')
 		str++;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
-		{
-			flag++;
 			sign *= -1;
-		}
 		str++;
 	}
+	check_err(*str);
 	while (*str >= '0' && *str <= '9')
 	{
-		if (flag && flag < 2)
-			flag++;
 		result *= 10;
 		result += (*str - '0') * sign;
 		if (!(result >= INT_MIN && result <= INT_MAX))
 			parse_err_exit();
 		str++;
 	}
-	if (*str != '\0' && !(flag % 2))
+	if (*str != '\0')
 		parse_err_exit();
 	return ((int)result);
 }

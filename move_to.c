@@ -6,11 +6,21 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:19:59 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 18:41:56 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 14:45:10 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+size_t	move_to_iter(t_data data, int iter, int pos, \
+		size_t (*f)(t_data data, int pos))
+{
+	size_t	cnt;
+
+	while (iter--)
+		cnt += f(data, pos);
+	return (cnt);
+}
 
 size_t	move_to_a_top(t_data data, int pos)
 {

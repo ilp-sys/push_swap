@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:01:23 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 21:38:02 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:40:24 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,13 @@ int	is_sorted_sort_3(t_data data, int pos)
 	}
 	else if ((num1 > num2 && num1 > num3) && (pos == B_TOP || pos == B_BTM))
 	{
-		move_to_a_top(data, pos);
-		move_to_a_top(data, pos);
-		move_to_a_top(data, pos);
+		move_to_iter(data, 3, pos, &move_to_a_top);
 		sort_2(data, A_TOP);
 		return (-1);
 	}
 	else if ((num3 < num1 && num3 < num2) && (pos == B_TOP || pos == B_BTM))
 	{
-		move_to_a_top(data, pos);
-		move_to_a_top(data, pos);
+		move_to_iter(data, 2, pos, &move_to_a_top);
 		sort_2(data, A_TOP);
 		move_to_a_top(data, pos);
 		return (-1);
@@ -82,10 +79,12 @@ int	is_sorted_sort_3(t_data data, int pos)
 int	is_sorted_sort_4(t_data data, int pos)
 {
 	int		i;
-	t_node	*start_node;
+	int		flag;
 	int		nums[4];
+	t_node	*start_node;
 
 	i = 0;
+	flag = 0;
 	start_node = get_start_node(data, pos);
 	while (i < 4)
 	{
@@ -94,11 +93,13 @@ int	is_sorted_sort_4(t_data data, int pos)
 	}
 	if ((pos == A_TOP) && \
 			(nums[0] < nums[1] && nums[1] < nums[2] && nums[2] < nums[3]))
-		return (-1);
+		flag = -1;
 	else if ((pos != A_TOP) && \
 		(nums[0] > nums[1] && nums[1] > nums[2] && nums[2] > nums[3]))
-		return (-1);
-	return (0);
+		flag = -1;
+	if (flag && (pos == B_TOP || pos == B_BTM))
+		move_to_iter(data, 4, pos, &move_to_a_top);
+	return (flag);
 }
 
 int	is_sorted(t_data data)

@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 21:15:57 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:38:01 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ void	collect(t_data data, int pos, size_t cnt)
 
 t_pair	partitioning(t_data data, size_t low, size_t high, int pos)
 {
-	size_t	cnt;
-	t_pair	part_i;
-	t_pair	pivot_v;
-	t_node	*start_node;
+	size_t			cnt;
+	t_pair			part_i;
+	t_node			*start_node;
+	const t_pair	pivot_v = find_pivot(get_start_node(data, pos), high - low, pos);
 
 	cnt = 0;
 	set_pair(&part_i, low, high);
-	start_node = get_start_node(data, pos);
-	pivot_v = find_pivot(start_node, low, high, pos);
 	while (high > low++)
 	{
 		start_node = get_start_node(data, pos);
