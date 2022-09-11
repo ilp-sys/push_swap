@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/11 23:08:23 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/11 23:10:59 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int	main(int argc, char *argv[])
 		}
 	}
 	exit(EXIT_SUCCESS);
-	system("leaks push_swap");
 	return (0);
 }
