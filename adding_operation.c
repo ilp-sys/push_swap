@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:38:28 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/09 18:36:55 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/11 23:00:51 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	optimize_swap(t_deq *ops, int op)
 	if (num == sa + sb)
 		ops->head->content = ss;
 	else if (num == sa + sa || num == sb + sb)
-		queue_pop_front(ops);
+		free(queue_pop_front(ops));
 	else
 		queue_push_front(ops, get_new_node(op));
 }
@@ -31,7 +31,7 @@ void	optimize_push(t_deq *ops, int op)
 
 	num = ops->head->content + op;
 	if (num == pa + pb)
-		queue_pop_front(ops);
+		free(queue_pop_front(ops));
 	else
 		queue_push_front(ops, get_new_node(op));
 }
