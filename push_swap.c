@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 19:46:00 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/11 23:09:16 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	collect(t_data data, int pos, size_t cnt)
 {
-	t_node	*start_node;
-
 	while (cnt--)
 	{
-		start_node = data.stack[0]->head;
 		if (get_queue_size(data.stack[0]) != 1)
 		{
 			operation_reverse_rotate(data.stack[0]);
