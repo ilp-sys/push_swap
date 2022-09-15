@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 19:30:10 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/16 01:00:07 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_pair
 }t_pair;
 
 //main.c
+void	print_ops(t_node *ops);
+void	print_ops_frame(t_deq ops);
 int		main(int argc, char *argv[]);
 
 //check_sorted.c
@@ -112,7 +114,6 @@ t_pair	find_pivot(t_node *start_node, int size, int pos);
 
 //push_swap_utils_2.c
 void	parse_err_exit(void);
-void	print_ops(t_node *ops);
 t_data	init_data(t_deq *stack_a, t_deq *stack_b, t_deq *ops);
 t_node	*get_start_node(t_data data, int pos);
 t_node	*get_next_node(t_node *node, int pos);
