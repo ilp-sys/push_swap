@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:43:49 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 16:59:27 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/17 22:44:34 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	run_swap(t_data data, int op)
 		operation_swap(data.stack[0]);
 		operation_swap(data.stack[1]);
 	}
-	append_to_ops(data.ops, op);
+	append_to_ops(data, op);
 }
 
 static void	run_push(t_data data, int op)
@@ -32,7 +32,7 @@ static void	run_push(t_data data, int op)
 		operation_push(data.stack[1], data.stack[0]);
 	else
 		operation_push(data.stack[0], data.stack[1]);
-	append_to_ops(data.ops, op);
+	append_to_ops(data, op);
 }
 
 static void	run_rotate(t_data data, int op)
@@ -46,7 +46,7 @@ static void	run_rotate(t_data data, int op)
 		operation_rotate(data.stack[0]);
 		operation_rotate(data.stack[1]);
 	}
-	append_to_ops(data.ops, op);
+	append_to_ops(data, op);
 }
 
 static void	run_reverse_rotate(t_data data, int op)
@@ -60,7 +60,7 @@ static void	run_reverse_rotate(t_data data, int op)
 		operation_reverse_rotate(data.stack[0]);
 		operation_reverse_rotate(data.stack[1]);
 	}
-	append_to_ops(data.ops, op);
+	append_to_ops(data, op);
 }
 
 void	execute_append(t_data data, int op)

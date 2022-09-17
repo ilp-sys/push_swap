@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:03:47 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 17:24:06 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/17 23:21:55 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sort_2(t_data data, int pos)
 	if (a_top->content > a_top->prev->content)
 	{
 		operation_swap(data.stack[0]);
-		append_to_ops(data.ops, sa);
+		append_to_ops(data, sa);
 	}
 }
 
@@ -57,7 +57,7 @@ void	sort_3(t_data data, int pos)
 		collect(data, pos, cnt);
 	sort_2(data, A_TOP);
 	operation_push(data.stack[1], data.stack[0]);
-	append_to_ops(data.ops, pa);
+	append_to_ops(data, pa);
 }
 
 void	sort_4(t_data data, int pos)

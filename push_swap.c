@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:10:45 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/11 23:09:16 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/17 23:21:26 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	collect(t_data data, int pos, size_t cnt)
 		if (get_queue_size(data.stack[0]) != 1)
 		{
 			operation_reverse_rotate(data.stack[0]);
-			append_to_ops(data.ops, rra);
+			append_to_ops(data, rra);
 		}
 		if (pos == 1)
 			continue ;
 		operation_push(data.stack[0], data.stack[1]);
-		append_to_ops(data.ops, pb);
+		append_to_ops(data, pb);
 		if (pos % 3 == 0)
 		{
 			operation_rotate(data.stack[1]);
-			append_to_ops(data.ops, rb);
+			append_to_ops(data, rb);
 		}
 	}
 }
@@ -88,6 +88,8 @@ void	quick_sort(t_data data, size_t low, size_t high, int pos)
 	}
 	else
 	{
+		if (pos == A_BTM && high - low == 5)
+			pos = A_TOP;
 		pi = partitioning(data, low, high, pos);
 		quick_sort(data, pi.latter, high, A_TOP);
 		quick_sort(data, pi.former, pi.latter, B_TOP);

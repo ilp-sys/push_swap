@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:51:21 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/16 01:00:07 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/17 23:21:36 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,12 @@ void	operation_rotate(t_deq *queue);
 void	operation_reverse_rotate(t_deq *queue);
 
 //adding_operation.c
-void	append_to_ops(t_deq *ops, int op);
+void	append_to_ops(t_data data, int op);
 void	optimize_swap(t_deq *ops, int op);
 void	optimize_push(t_deq *ops, int op);
 void	optimize_rotate(t_deq *ops, int op);
 
-//execute_append.x
+//execute_append.c
 void	execute_append(t_data data, int op);
 
 #endif
