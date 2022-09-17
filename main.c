@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:55:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/16 01:00:35 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/18 02:06:06 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	print_ops(t_node *ops)
 	else if (ops->content == rrr)
 		write(STDOUT_FILENO, "rrr\n", 4);
 }
-
 
 int	main(int argc, char *argv[])
 {
