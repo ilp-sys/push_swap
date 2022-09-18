@@ -6,7 +6,7 @@
 /*   By: jiwahn <jiwahn@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 19:29:19 by jiwahn            #+#    #+#             */
-/*   Updated: 2022/09/10 19:31:21 by jiwahn           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:40:35 by jiwahn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,17 @@ static int	is_sorted_sort_3_2(t_data data, int pos, int nums[])
 		if ((pos == A_TOP && (nums[1] > nums[2])) || \
 				(pos == A_BTM && (nums[0] < nums[1])))
 		{
-			execute_append(data, ra);
-			sort_2(data, A_TOP);
-			execute_append(data, rra);
+			if (pos == A_BTM)
+			{
+				execute_append(data, sa);
+				execute_append(data, ra);
+			}
+			else
+			{
+				execute_append(data, ra);
+				sort_2(data, A_TOP);
+				execute_append(data, rra);
+			}
 		}
 	}
 	else
